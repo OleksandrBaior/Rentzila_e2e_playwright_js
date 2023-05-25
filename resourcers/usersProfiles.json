@@ -1,0 +1,61 @@
+{
+    "validUser": {
+        "email": "testuserfortesting14@gmail.com",
+        "password": "Testuser14",
+        "phoneNumber": "+380964500002"
+    },
+    "validUserWithSpaceBegin": {
+        "email": "   testuserfortesting14@gmail.com",
+        "password": "Testuser14",
+        "phoneNumber": "+380964500002"
+    },
+    "validUserWithSpaceBEnd": {
+        "email": "testuserfortesting14@gmail.com   ",
+        "password": "Testuser14",
+        "phoneNumber": "+380964500002"
+    },
+    "validUserUppercase": {
+        "email": "TESTUSERFORTESTING14@GMAIL.COM",
+        "password": "Testuser14",
+        "phoneNumber": "+380964500002"
+    },
+    "notExistingUser": {
+        "email": "testuserrentzila99@gmail.com",
+        "password": "Testuser13"
+    },
+
+    "invalidEmails": {
+        "emailWithSpace": "testuser  rentzila@gmail.com",
+        "emailCyrillic": "еуіегіуккутеяшдф",
+        "emailWithout@": "testuserrentzilagmail.com",
+        "emailWithoutDot": "testuserrentzila@gmailcom",
+        "emailWithCom": "testuserrentzila@gmail",
+        "emailWihoutGmail": "testuserrentzila@.com",
+        "emailWithout@gmail.com": "testuserrentzila",
+        "emailWith@@": "testuserrentzila@@gmail.com"  
+    },
+
+    "invalidPasswords": {
+        "passwordWithSpace": "Testuser14  ",
+        "passwordWithBeginningSpcae": "  Testuser14",
+        "passwordWithUppercase": "testuser14",
+        "passwordWithoutLowercace": "TESTUSER14",
+        "passwordCyrillic": "Еуіегіук10"
+    },
+
+    "invalidPhoneNumber": {
+        "numberWithoutCode": "964500002",
+        "numberWithoutLast": "096450000",
+        "numberWith-": "+38096-45-00-002",
+        "numberWithSpaces": "+38096 45 00 002",
+        "numberWith()": "+38(096)4500002",
+        "numberWithout+380andWith()": "(96)4500002",
+        "numberWith11": "05067430600",
+        "numberWithOtherCountry": "+10506743060",
+        "numberWithout38": "+0506743060"
+    }
+}
+
+ 
+
+

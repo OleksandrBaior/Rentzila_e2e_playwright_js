@@ -1,0 +1,17 @@
+{
+  "name": "rentzila_e2e_playwright_js",
+  "version": "1.0.0",
+  "description": "Search service for special equipment services.",
+  "main": "index.js",
+  "scripts": {
+    "testConsole": "npx playwright test",
+    "testUiMode": "npx playwright test --ui",
+    "openReport": "npx playwright show-report"
+  },
+  "keywords": [],
+  "author": "Oleksandr Baior",
+  "license": "ISC",
+  "devDependencies": {
+    "@playwright/test": "^1.34.3"
+  }
+}

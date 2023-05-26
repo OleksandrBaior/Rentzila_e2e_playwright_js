@@ -13,4 +13,6 @@ export class Base  {
         await this.page.goto('');
         await this.page.waitForLoadState('networkidle');
     };
+
+    
 };

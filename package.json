@@ -4,8 +4,14 @@
   "description": "Search service for special equipment services.",
   "main": "index.js",
   "scripts": {
-    "testConsole": "npx playwright test",
-    "testUiMode": "npx playwright test --ui",
+    "test: headless": "npx playwright test",
+    "test: uiMode": "npx playwright test --ui",
+    "testChromium: headless": "npx playwright test --project=chromium",
+    "testChromium: uiMode": "npx playwright test --ui --project=chromium",
+    "testWebkit: headless": "npx playwright test --project=webkit",
+    "testWebkit: uiMode": "npx playwright test --ui --project=webkit",
+    "testFirefox: headless": "npx playwright test --project=firefox",
+    "testFirefox: uiMode": "npx playwright test --ui --project=firefox",
     "openReport": "npx playwright show-report"
   },
   "keywords": [],

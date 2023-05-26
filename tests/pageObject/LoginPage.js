@@ -123,11 +123,10 @@ export class LoginPage extends Base {
         await this.setValueInField(this.emailOrPhoneField, email);
         await this.setValueInField(this.passwordField, password);
         await this.clickElement(this.signInBtn);
+        await this.clickElement(this.avatarBlock)
         await this.ckeckProfileEmailVisible(email);
         await this.clickElement(this.logoutBtn);
     }
-
-
 }
 
 

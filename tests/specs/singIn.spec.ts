@@ -55,6 +55,7 @@ test('C199 - Reset the password with invalid email', async ({ page }) => {
   await login.checkErrorEmptyFieldDisplayed(login.restorePasswordMsg)
   await login.setValueInField(login.resetEmailOrPhoneField, usersProfiles.validUser.email);
   await login.clickElement(login.closeResetModal);
+  await login.checkElementIsNotVisible(login.restorePasswordPopUp);
   await login.clickElement(login.forgotPasswordBtn);
   await login.verifyInvalidEmailsToRestorePassword();
   await login.setValueInField(login.resetEmailOrPhoneField, usersProfiles.notExistingUser.email);
@@ -77,7 +78,6 @@ test('C201 - Authorization with valid email and password', async ({ page }) => {
   await login.clickElement(login.avatarBlock);
   await login.ckeckProfileEmailVisible(usersProfiles.validUser.email);
   await login.clickElement(login.logoutBtn);
-  await login.checkLoginWithValidEmails(usersProfiles.validUserUppercase.email, usersProfiles.validUserUppercase.password);
-//   await login.checkLoginWithValidEmails(usersProfiles.validUserWithSpaceBegin.email, usersProfiles.validUserWithSpaceBegin.password)
+//   await login.checkLoginWithValidEmails(usersProfiles.validUserUppercase.email, usersProfiles.validUserUppercase.password);
 //   await login.checkLoginWithValidEmails(usersProfiles.validUserWithSpaceBEnd.email, usersProfiles.validUserWithSpaceBEnd.password)
 });

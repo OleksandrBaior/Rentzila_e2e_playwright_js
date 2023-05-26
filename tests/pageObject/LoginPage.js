@@ -2,6 +2,12 @@ import { expect } from '@playwright/test';
 import { Base } from './BasePage';
 import usersProfiles  from '../../resourcers/usersProfiles.json'
 
+const emptyFieldError = 'Поле не може бути порожнім';
+const emailOrPhoneError = 'Неправильний формат email або номера телефону';
+const passwordError = 'Пароль повинен містити як мінімум 1 цифру, 1 велику літеру і 1 малу літеру, також не повинен містити кирилицю та пробіли';
+const emailPasswordError = 'Невірний e-mail або пароль';
+const noExistEmailToRestore = 'Користувач з таким емейлом або номером телефону не верифікований в системі';
+
 export class LoginPage extends Base {
    /**
    * @param {import('@playwright/test').Page} page
@@ -30,8 +36,9 @@ export class LoginPage extends Base {
         this.logoutBtn = page.locator('//*[@data-testid="logout"]');
         this.hiddenPasswordIcon = page.locator('//*[@data-testid="reactHookButton"]');
         this.profileEmail = page.locator('[class*="ProfileDropdownMenu_email"]');
+        this.restorePasswordPopUp = page.locator('//*[@data-testid="restorePasswordContainer"]');
     }
-
+   
     async LoginNavigate() {
         await this.navigate();
     }
@@ -45,32 +52,30 @@ export class LoginPage extends Base {
         await expect(element).not.toBeVisible();
     }
     async checkErrorEmptyFieldDisplayed(locator) {
-        expect(await locator.textContent()).toEqual('Поле не може бути порожнім');
+        expect(await locator.textContent()).toEqual(emptyFieldError);
     }
     async checkErrorEmailOrPhoneIsDisplayed(locator) {
-        expect(await locator.textContent()).toEqual('Неправильний формат email або номера телефону');
+        expect(await locator.textContent()).toEqual(emailOrPhoneError);
     }
     async checkErrorPasswordIsDisplayed() {
-        expect(await this.errorInvalidPasswordMsg.textContent()).toEqual('Пароль повинен містити як мінімум 1 цифру, 1 велику літеру і 1 малу літеру, також не повинен містити кирилицю та пробіли');
+        expect(await this.errorInvalidPasswordMsg.textContent()).toEqual(passwordError);
     }
     async checkErrorInvalidEmailOrPasswordDisplayed() {
-        expect(await this.generalErrorMsg.textContent()).toEqual('Невірний e-mail або пароль');
+        expect(await this.generalErrorMsg.textContent()).toEqual(emailPasswordError);
     }
     async checkRestoreErrorNoExistEmailDisplayed() {
-        expect(await this.restoreError.textContent()).toEqual('Користувач з таким емейлом або номером телефону не верифікований в системі')
+        expect(await this.restoreError.textContent()).toEqual(noExistEmailToRestore);
     }
     /**
-    * @name setValueInField funtion sets value in the field
+    * @setValueInField funtion sets value in the field
     * @param element Field that is selected for use
     * @param value Value that is set in the field
     */ 
     async setValueInField(element, value) {
         await element.fill(value);
-        await this.page.waitForTimeout(500);
     }
     async clearValueInField(locator) {
         await locator.clear();
-        await this.page.waitForTimeout(500);
     }
    async verifyInvalidEmails() {
        for (const email in usersProfiles.invalidEmails) {
@@ -108,11 +113,7 @@ export class LoginPage extends Base {
         await expect(this.passwordField).toHaveValue(usersProfiles.validUser.password); 
     }
     async checkPaswordIsNotVisible() {
-        await expect(this.passwordField).toHaveValue(usersProfiles.validUser.password); 
-    }
-    async logOutUser() {
-        await this.clickElement(this.avatarBlock);
-        await this.clickElement(this.logoutBtn);
+        await expect(this.passwordField).toHaveAttribute('type', 'password');
     }
     async ckeckProfileEmailVisible(email) {
         expect(await this.profileEmail.textContent()).toContain(email.toLowerCase()); 

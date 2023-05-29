@@ -1,12 +1,12 @@
 import { test } from '@playwright/test';
 import { LoginPage } from '../pages/LoginPage';
+import { BasePage } from '../pages/BasePage';
+import { HeaderPage } from '../pages/HeaderPage';
 import usersProfiles from '../../resourcers/usersProfiles.json'
-import { Base } from '../pages/BasePage';
-import { HeaderPage } from '../pages/HeaderPage'
 
 test('C200 - Authorization with empty fields', async ({ page }) => {
   const login = new LoginPage(page);
-  const base = new Base(page);
+  const base = new BasePage(page);
   const header = new HeaderPage(page);
 
   await base.navigate();
@@ -31,7 +31,7 @@ test('C200 - Authorization with empty fields', async ({ page }) => {
 
 test('C203 - Authorization with invalid credentials', async ({ page }) => {
   const login = new LoginPage(page);
-  const base = new Base(page);
+  const base = new BasePage(page);
   const header = new HeaderPage(page);
 
   await base.navigate();
@@ -47,7 +47,7 @@ test('C203 - Authorization with invalid credentials', async ({ page }) => {
 
 test('C207 - Authorization with invalid phone', async ({ page }) => {
   const login = new LoginPage(page);
-  const base = new Base(page);
+  const base = new BasePage(page);
   const header = new HeaderPage(page);
   
   await base.navigate();
@@ -58,7 +58,7 @@ test('C207 - Authorization with invalid phone', async ({ page }) => {
 
 test('C199 - Reset the password with invalid email', async ({ page }) => {
   const login = new LoginPage(page);
-  const base = new Base(page);
+  const base = new BasePage(page);
   const header = new HeaderPage(page);
   
   await base.navigate();
@@ -79,7 +79,7 @@ test('C199 - Reset the password with invalid email', async ({ page }) => {
 
 test('C201 - Authorization with valid email and password', async ({ page }) => {
   const login = new LoginPage(page);
-  const base = new Base(page);
+  const base = new BasePage(page);
   const header = new HeaderPage(page);
   
   await base.navigate();

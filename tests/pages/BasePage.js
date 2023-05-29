@@ -1,5 +1,5 @@
 
-export class Base  {
+export class BasePage  {
   
    /**
    * @param {import('@playwright/test').Page} page
@@ -14,5 +14,16 @@ export class Base  {
         await this.page.waitForLoadState('networkidle');
     };
 
+    async clickElement(locator) {
+        await locator.click();
+    }
+
+    async checkElementIsVisible(element) {
+        await expect(element).toBeVisible();
+    }
+
+    async checkElementIsNotVisible(element) {
+        await expect(element).not.toBeVisible();
+    }
     
 };

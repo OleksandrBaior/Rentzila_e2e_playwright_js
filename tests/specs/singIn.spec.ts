@@ -1,11 +1,18 @@
 import { test } from '@playwright/test';
-import { LoginPage } from '../pageObject/LoginPage';
+import { LoginPage } from '../pages/LoginPage';
 import usersProfiles from '../../resourcers/usersProfiles.json'
+import { Base } from '../pages/BasePage';
+import { HeaderPage } from '../pages/HeaderPage'
+
+
 
 test('C200 - Authorization with empty fields', async ({ page }) => {
   const login = new LoginPage(page);
-  await login.LoginNavigate();
-  await login.clickElement(login.loginButton);
+  const base = new Base(page);
+  const header = new HeaderPage(page);
+
+  await base.navigate();
+  await header.clickElement(header.loginButton);
   await login.checkElementIsVisible(login.authorizationPopUp);
   await login.clickElement(login.signInBtn);
   await login.checkErrorEmptyFieldDisplayed(login.errorEmail);
@@ -26,8 +33,11 @@ test('C200 - Authorization with empty fields', async ({ page }) => {
 
 test('C203 - Authorization with invalid credentials', async ({ page }) => {
   const login = new LoginPage(page);
-  await login.LoginNavigate();
-  await login.clickElement(login.loginButton);
+  const base = new Base(page);
+  const header = new HeaderPage(page);
+
+  await base.navigate();
+  await header.clickElement(header.loginButton);
   await login.setValueInField(login.passwordField, usersProfiles.validUser.password);
   await login.verifyInvalidEmails();
   await login.setValueInField(login.emailOrPhoneField, usersProfiles.validUser.email);
@@ -39,16 +49,22 @@ test('C203 - Authorization with invalid credentials', async ({ page }) => {
 
 test('C207 - Authorization with invalid phone', async ({ page }) => {
   const login = new LoginPage(page);
-  await login.LoginNavigate();
-  await login.clickElement(login.loginButton);
+  const base = new Base(page);
+  const header = new HeaderPage(page);
+  
+  await base.navigate();
+  await header.clickElement(header.loginButton);
   await login.setValueInField(login.passwordField, usersProfiles.validUser.password);
   await login.verifyInvalidPhoneNumber();
 });
 
 test('C199 - Reset the password with invalid email', async ({ page }) => {
   const login = new LoginPage(page);
-  await login.LoginNavigate();
-  await login.clickElement(login.loginButton);
+  const base = new Base(page);
+  const header = new HeaderPage(page);
+  
+  await base.navigate();
+  await header.clickElement(header.loginButton);
   await login.clickElement(login.forgotPasswordBtn);
   await login.checkElementIsVisible(login.restorePasswordModal);
   await login.clickElement(login.restorePasswordBtn);
@@ -65,8 +81,12 @@ test('C199 - Reset the password with invalid email', async ({ page }) => {
 
 test('C201 - Authorization with valid email and password', async ({ page }) => {
   const login = new LoginPage(page);
-  await login.LoginNavigate();
-  await login.clickElement(login.loginButton);
+  const base = new Base(page);
+  const header = new HeaderPage(page);
+  
+  await base.navigate();
+  await header.clickElement(header.loginButton);
+  await login.checkElementIsVisible(login.authorizationPopUp);
   await login.setValueInField(login.emailOrPhoneField, usersProfiles.validUser.email);
   await login.setValueInField(login.passwordField, usersProfiles.validUser.password);
   await login.clickElement(login.hiddenPasswordIcon);
@@ -75,9 +95,9 @@ test('C201 - Authorization with valid email and password', async ({ page }) => {
   await login.checkPaswordIsNotVisible();
   await login.clickElement(login.signInBtn);
   await login.checkElementIsNotVisible(login.authorizationPopUp);
-  await login.clickElement(login.avatarBlock);
+  await header.clickElement(header.avatarBlock);
   await login.ckeckProfileEmailVisible(usersProfiles.validUser.email);
-  await login.clickElement(login.logoutBtn);
-//   await login.checkLoginWithValidEmails(usersProfiles.validUserUppercase.email, usersProfiles.validUserUppercase.password);
-//   await login.checkLoginWithValidEmails(usersProfiles.validUserWithSpaceBEnd.email, usersProfiles.validUserWithSpaceBEnd.password)
+  await header.clickElement(header.logoutBtn);
+  // await login.checkLoginWithValidEmails(usersProfiles.validUserUppercase.email, usersProfiles.validUserUppercase.password);
+  // await login.checkLoginWithValidEmails(usersProfiles.validUserWithSpaceBEnd.email, usersProfiles.validUserWithSpaceBEnd.password)
 });

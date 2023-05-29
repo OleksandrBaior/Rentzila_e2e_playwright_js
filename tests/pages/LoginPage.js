@@ -15,7 +15,6 @@ export class LoginPage extends Base {
     constructor(page) {
         super(page);
         this.page = page;
-        this.loginButton = page.locator('div[class*="Navbar_btn_enter"]');
         this.authorizationPopUp = page.locator('div[class*="Authorization_wrapper"]');
         this.signInBtn = page.getByRole('button', { name: 'Увійти', exact: true });
         this.errorPassword = page.getByTestId('authorizationContainer').locator('form div').filter({ hasText: 'Пароль Поле не може бути порожнімЗабули пароль?' }).getByRole('alert')
@@ -32,16 +31,13 @@ export class LoginPage extends Base {
         this.resetEmailOrPhoneField = page.locator('//*[@id=""]');
         this.closeResetModal = page.locator('[class*="RestorePasswordPopup_cross"] svg');
         this.restoreError = page.locator('//*[@data-testid="restoreError"]'); 
-        this.avatarBlock = page.getByTestId('avatarBlock');
-        this.logoutBtn = page.locator('//*[@data-testid="logout"]');
+        // this.avatarBlock = page.getByTestId('avatarBlock');
+        // this.logoutBtn = page.locator('//*[@data-testid="logout"]');
         this.hiddenPasswordIcon = page.locator('//*[@data-testid="reactHookButton"]');
         this.profileEmail = page.locator('[class*="ProfileDropdownMenu_email"]');
         this.restorePasswordPopUp = page.locator('//*[@data-testid="restorePasswordContainer"]');
     }
    
-    async LoginNavigate() {
-        await this.navigate();
-    }
     async clickElement(locator) {
         await locator.click();
     }
@@ -120,6 +116,7 @@ export class LoginPage extends Base {
     }
     async checkLoginWithValidEmails(email, password) {
         await this.clickElement(this.loginButton);
+        await this.checkElementIsVisible(this.authorizationPopUp);
         await this.setValueInField(this.emailOrPhoneField, email);
         await this.setValueInField(this.passwordField, password);
         await this.clickElement(this.signInBtn);

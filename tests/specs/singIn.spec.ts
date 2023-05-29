@@ -4,8 +4,6 @@ import usersProfiles from '../../resourcers/usersProfiles.json'
 import { Base } from '../pages/BasePage';
 import { HeaderPage } from '../pages/HeaderPage'
 
-
-
 test('C200 - Authorization with empty fields', async ({ page }) => {
   const login = new LoginPage(page);
   const base = new Base(page);
@@ -98,6 +96,6 @@ test('C201 - Authorization with valid email and password', async ({ page }) => {
   await header.clickElement(header.avatarBlock);
   await login.ckeckProfileEmailVisible(usersProfiles.validUser.email);
   await header.clickElement(header.logoutBtn);
-  // await login.checkLoginWithValidEmails(usersProfiles.validUserUppercase.email, usersProfiles.validUserUppercase.password);
-  // await login.checkLoginWithValidEmails(usersProfiles.validUserWithSpaceBEnd.email, usersProfiles.validUserWithSpaceBEnd.password)
+  await login.checkLoginWithValidEmails(usersProfiles.validUserUppercase.email, usersProfiles.validUserUppercase.password);
+  await login.checkLoginWithValidEmails(usersProfiles.validUserWithSpaceBEnd.email, usersProfiles.validUserWithSpaceBEnd.password)
 });

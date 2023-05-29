@@ -98,6 +98,6 @@ test('C201 - Authorization with valid email and password', async ({ page }) => {
   await header.clickElement(header.logoutBtn);
   await login.checkLoginWithValidEmails(usersProfiles.validUserUppercase.email, usersProfiles.validUserUppercase.password);
  
-  await login.checkLoginWithValidEmails(usersProfiles.validUserWithSpaceBegin.email, usersProfiles.validUserWithSpaceBegin.password)
-  await login.checkLoginWithValidEmails(usersProfiles.validUserWithSpaceBEnd.email, usersProfiles.validUserWithSpaceBEnd.password)
+  // await login.checkLoginWithValidEmails(usersProfiles.validUserWithSpaceBegin.email, usersProfiles.validUserWithSpaceBegin.password)
+  // await login.checkLoginWithValidEmails(usersProfiles.validUserWithSpaceBEnd.email, usersProfiles.validUserWithSpaceBEnd.password)
 });

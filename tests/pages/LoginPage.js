@@ -33,44 +33,35 @@ export class LoginPage extends HeaderPage {
         this.closeResetModal = page.locator('[class*="RestorePasswordPopup_cross"] svg');
         this.restoreError = page.locator('//*[@data-testid="restoreError"]'); 
         this.hiddenPasswordIcon = page.locator('//*[@data-testid="reactHookButton"]');
-        this.profileEmail = page.locator('[class*="ProfileDropdownMenu_email"]');
         this.restorePasswordPopUp = page.locator('//*[@data-testid="restorePasswordContainer"]');
-    }
-   
-    async checkElementIsVisible(element) {
-        await expect(element).toBeVisible();
-    }
-
-    async checkElementIsNotVisible(element) {
-        await expect(element).not.toBeVisible();
     }
 
     async checkErrorEmptyFieldDisplayed(locator) {
         expect(await locator.textContent()).toEqual(emptyFieldError);
     }
+
     async checkErrorEmailOrPhoneIsDisplayed(locator) {
         expect(await locator.textContent()).toEqual(emailOrPhoneError);
     }
+
     async checkErrorPasswordIsDisplayed() {
         expect(await this.errorInvalidPasswordMsg.textContent()).toEqual(passwordError);
     }
+
     async checkErrorInvalidEmailOrPasswordDisplayed() {
         expect(await this.generalErrorMsg.textContent()).toEqual(emailPasswordError);
     }
+
     async checkRestoreErrorNoExistEmailDisplayed() {
         expect(await this.restoreError.textContent()).toEqual(noExistEmailToRestore);
     }
+
     /**
     * @setValueInField funtion sets value in the field
     * @param element Field that is selected for use
     * @param value Value that is set in the field
     */ 
-    async setValueInField(element, value) {
-        await element.fill(value);
-    }
-    async clearValueInField(locator) {
-        await locator.clear();
-    }
+
    async verifyInvalidEmails() {
        for (const email in usersProfiles.invalidEmails) {
             await this.setValueInField(this.emailOrPhoneField, usersProfiles.invalidEmails[email])
@@ -78,7 +69,8 @@ export class LoginPage extends HeaderPage {
             await this.checkErrorEmailOrPhoneIsDisplayed(this.errorInvalidEmailMsg);
             await this.clearValueInField(this.emailOrPhoneField);
         }
-    }
+   }
+    
     async verifyInvalidPasswords() {
         for (const password in usersProfiles.invalidPasswords) {
             await this.setValueInField(this.passwordField, usersProfiles.invalidPasswords[password])
@@ -95,6 +87,7 @@ export class LoginPage extends HeaderPage {
             await this.clearValueInField(this.emailOrPhoneField);
             }
     }
+
     async verifyInvalidEmailsToRestorePassword() {
         for (const email in usersProfiles.invalidEmails) {
             await this.setValueInField(this.resetEmailOrPhoneField, usersProfiles.invalidEmails[email])
@@ -103,15 +96,15 @@ export class LoginPage extends HeaderPage {
             await this.clearValueInField(this.emailOrPhoneField);
          }
     }
+
     async checkPaswordIsVisible() {
         await expect(this.passwordField).toHaveValue(usersProfiles.validUser.password); 
     }
+    
     async checkPaswordIsNotVisible() {
         await expect(this.passwordField).toHaveAttribute('type', 'password');
     }
-    async ckeckProfileEmailVisible(email) {
-        expect(await this.profileEmail.textContent()).toContain(email.toLowerCase()); 
-    }
+   
     async checkLoginWithValidEmails(email, password) {
         await this.clickElement(this.loginButton);
         await this.checkElementIsVisible(this.authorizationPopUp);

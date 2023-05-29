@@ -1,3 +1,4 @@
+import { expect } from '@playwright/test';
 
 export class BasePage  {
   
@@ -16,6 +17,22 @@ export class BasePage  {
 
     async clickElement(locator) {
         await locator.click();
+    }
+
+    async checkElementIsVisible(element) {
+        await expect(element).toBeVisible();
+    }
+    
+    async checkElementIsNotVisible(element) {
+        await expect(element).not.toBeVisible();
+    }
+
+    async setValueInField(element, value) {
+        await element.fill(value);
+    }
+
+    async clearValueInField(locator) {
+        await locator.clear();
     }
 
 

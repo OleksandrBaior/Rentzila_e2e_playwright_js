@@ -1,6 +1,7 @@
 import { expect } from '@playwright/test';
-import { Base } from './BasePage';
+import { HeaderPage } from './HeaderPage';
 import usersProfiles  from '../../resourcers/usersProfiles.json'
+
 
 const emptyFieldError = 'Поле не може бути порожнім';
 const emailOrPhoneError = 'Неправильний формат email або номера телефону';
@@ -8,7 +9,7 @@ const passwordError = 'Пароль повинен містити як міні�
 const emailPasswordError = 'Невірний e-mail або пароль';
 const noExistEmailToRestore = 'Користувач з таким емейлом або номером телефону не верифікований в системі';
 
-export class LoginPage extends Base {
+export class LoginPage extends HeaderPage {
    /**
    * @param {import('@playwright/test').Page} page
    */ 
@@ -31,8 +32,6 @@ export class LoginPage extends Base {
         this.resetEmailOrPhoneField = page.locator('//*[@id=""]');
         this.closeResetModal = page.locator('[class*="RestorePasswordPopup_cross"] svg');
         this.restoreError = page.locator('//*[@data-testid="restoreError"]'); 
-        // this.avatarBlock = page.getByTestId('avatarBlock');
-        // this.logoutBtn = page.locator('//*[@data-testid="logout"]');
         this.hiddenPasswordIcon = page.locator('//*[@data-testid="reactHookButton"]');
         this.profileEmail = page.locator('[class*="ProfileDropdownMenu_email"]');
         this.restorePasswordPopUp = page.locator('//*[@data-testid="restorePasswordContainer"]');
@@ -120,6 +119,7 @@ export class LoginPage extends Base {
         await this.setValueInField(this.emailOrPhoneField, email);
         await this.setValueInField(this.passwordField, password);
         await this.clickElement(this.signInBtn);
+        await this.checkElementIsNotVisible(this.authorizationPopUp)
         await this.clickElement(this.avatarBlock)
         await this.ckeckProfileEmailVisible(email);
         await this.clickElement(this.logoutBtn);

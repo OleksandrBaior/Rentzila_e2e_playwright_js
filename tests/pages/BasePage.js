@@ -18,12 +18,6 @@ export class BasePage  {
         await locator.click();
     }
 
-    async checkElementIsVisible(element) {
-        await expect(element).toBeVisible();
-    }
 
-    async checkElementIsNotVisible(element) {
-        await expect(element).not.toBeVisible();
-    }
     
 };

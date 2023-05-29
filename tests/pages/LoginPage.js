@@ -37,6 +37,13 @@ export class LoginPage extends HeaderPage {
         this.restorePasswordPopUp = page.locator('//*[@data-testid="restorePasswordContainer"]');
     }
    
+    async checkElementIsVisible(element) {
+        await expect(element).toBeVisible();
+    }
+
+    async checkElementIsNotVisible(element) {
+        await expect(element).not.toBeVisible();
+    }
 
     async checkErrorEmptyFieldDisplayed(locator) {
         expect(await locator.textContent()).toEqual(emptyFieldError);

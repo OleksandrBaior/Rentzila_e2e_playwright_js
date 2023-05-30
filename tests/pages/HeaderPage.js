@@ -14,7 +14,7 @@ export class HeaderPage extends BasePage {
         this.page = page;
         this.loginButton = page.locator('div[class*="Navbar_btn_enter"]');
         this.avatarBlock = page.getByTestId('avatarBlock');
-        this.logoutBtn = page.locator('//*[@data-testid="logout"]');
+        this.logoutBtn = page.locator('[data-testid="logout"]');
         this.profileEmail = page.locator('[class*="ProfileDropdownMenu_email"]');
      }
     

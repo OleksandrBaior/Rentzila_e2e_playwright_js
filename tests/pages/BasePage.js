@@ -7,16 +7,17 @@ export class BasePage  {
    */
     
     constructor(page) {
-        this.page = page
+        this.page = page;
     }
     
-    async navigate() {
+    async navigateToMainPage() {
         await this.page.goto('');
         await this.page.waitForLoadState('networkidle');
     };
 
     async clickElement(locator) {
         await locator.click();
+
     }
 
     async checkElementIsVisible(element) {

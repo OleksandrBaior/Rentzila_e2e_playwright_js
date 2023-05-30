@@ -9,7 +9,7 @@ test('C200 - Authorization with empty fields', async ({ page }) => {
   const base = new BasePage(page);
   const header = new HeaderPage(page);
 
-  await base.navigate();
+  await base.navigateToMainPage();
   await header.clickElement(header.loginButton);
   await login.checkElementIsVisible(login.authorizationPopUp);
   await login.clickElement(login.signInBtn);
@@ -34,7 +34,7 @@ test('C203 - Authorization with invalid credentials', async ({ page }) => {
   const base = new BasePage(page);
   const header = new HeaderPage(page);
 
-  await base.navigate();
+  await base.navigateToMainPage();
   await header.clickElement(header.loginButton);
   await login.setValueInField(login.passwordField, usersProfiles.validUser.password);
   await login.verifyInvalidEmails();
@@ -50,7 +50,7 @@ test('C207 - Authorization with invalid phone', async ({ page }) => {
   const base = new BasePage(page);
   const header = new HeaderPage(page);
   
-  await base.navigate();
+  await base.navigateToMainPage();
   await header.clickElement(header.loginButton);
   await login.setValueInField(login.passwordField, usersProfiles.validUser.password);
   await login.verifyInvalidPhoneNumber();
@@ -61,7 +61,7 @@ test('C199 - Restore the password with invalid email', async ({ page }) => {
   const base = new BasePage(page);
   const header = new HeaderPage(page);
   
-  await base.navigate();
+  await base.navigateToMainPage();
   await header.clickElement(header.loginButton);
   await login.clickElement(login.forgotPasswordBtn);
   await login.checkElementIsVisible(login.restorePasswordModal);
@@ -82,7 +82,7 @@ test('C201 - Authorization with valid email and password', async ({ page }) => {
   const base = new BasePage(page);
   const header = new HeaderPage(page);
   
-  await base.navigate();
+  await base.navigateToMainPage();
   await header.clickElement(header.loginButton);
   await login.checkElementIsVisible(login.authorizationPopUp);
   await login.setValueInField(login.emailOrPhoneField, usersProfiles.validUser.email);

@@ -2,12 +2,11 @@ import { expect } from '@playwright/test';
 import { HeaderPage } from './HeaderPage';
 import usersProfiles  from '../../resourcers/usersProfiles.json'
 
-
-const emptyFieldError = 'Поле не може бути порожнім';
-const emailOrPhoneError = 'Неправильний формат email або номера телефону';
-const passwordError = 'Пароль повинен містити як мінімум 1 цифру, 1 велику літеру і 1 малу літеру, також не повинен містити кирилицю та пробіли';
-const emailPasswordError = 'Невірний e-mail або пароль';
-const noExistEmailToRestore = 'Користувач з таким емейлом або номером телефону не верифікований в системі';
+export const emptyFieldError = 'Поле не може бути порожнім';
+export const emailOrPhoneError = 'Неправильний формат email або номера телефону';
+export const passwordError = 'Пароль повинен містити як мінімум 1 цифру, 1 велику літеру і 1 малу літеру, також не повинен містити кирилицю та пробіли';
+export const generalError = 'Невірний e-mail або пароль';
+export const noExistEmailToRestore = 'Користувач з таким емейлом або номером телефону не верифікований в системі';
 
 export class LoginPage extends HeaderPage {
    /**
@@ -17,56 +16,38 @@ export class LoginPage extends HeaderPage {
         super(page);
         this.page = page;
         this.authorizationPopUp = page.locator('div[class*="Authorization_wrapper"]');
-        this.signInBtn = page.getByRole('button', { name: 'Увійти', exact: true });
-        this.errorPassword = page.getByTestId('authorizationContainer').locator('form div').filter({ hasText: 'Пароль Поле не може бути порожнімЗабули пароль?' }).getByRole('alert')
-        this.errorEmail = page.getByTestId('authorizationContainer').locator('form div').filter({ hasText: 'E-mail або номер телефону Поле не може бути порожнім' }).getByRole('alert')
-        this.errorInvalidEmailMsg = page.getByText('Неправильний формат email або номера телефону')
-        this.errorInvalidPasswordMsg = page.getByText('Пароль повинен містити як мінімум 1 цифру, 1 велику літеру і 1 малу літеру, тако')
-        this.emailOrPhoneField = page.getByLabel('E-mail або номер телефону');
-        this.passwordField = page.getByLabel('Пароль');
-        this.generalErrorMsg = page.getByTestId('errorMessage');
+        this.signInBtn = page.locator('[class*="LoginForm_submitBtn"]');
+        this.errorEmailMsg = page.locator('//form/div[1]/p')
+        this.errorPasswordMsg = page.locator('//form/div[2]/div[1]/p')
+        this.emailOrPhoneField = page.locator('[data-testid="reactHookInput"][name="login"]');
+        this.passwordField = page.locator('[data-testid="reactHookInput"][name="password"]');
+        this.generalErrorMsg = page.locator('[data-testid="errorMessage"]');
         this.restorePasswordModal = page.locator('//*[@data-testid="restorePasswordContainer"]');
         this.forgotPasswordBtn = page.locator("//div[starts-with(text(),'Забули пароль?')]");
         this.restorePasswordBtn = page.locator('[class*="RestorePasswordPopup_submitBtn"]'); 
-        this.restorePasswordMsg = page.locator('[class*="CustomReactHookInput_error_message"]');
+        this.restorePasswordMsg = page.locator('form[class*="RestorePasswordPopup_form_"] p');
         this.resetEmailOrPhoneField = page.locator('//*[@id=""]');
-        this.closeResetModal = page.locator('[class*="RestorePasswordPopup_cross"] svg');
+        this.closeResetModal = page.locator('[data-testid="restorePasswordCross"] [data-testid="crossDeleteIcon"]');
         this.restoreError = page.locator('//*[@data-testid="restoreError"]'); 
         this.hiddenPasswordIcon = page.locator('//*[@data-testid="reactHookButton"]');
         this.restorePasswordPopUp = page.locator('//*[@data-testid="restorePasswordContainer"]');
     }
 
-    async checkErrorEmptyFieldDisplayed(locator) {
-        expect(await locator.textContent()).toEqual(emptyFieldError);
-    }
-
-    async checkErrorEmailOrPhoneIsDisplayed(locator) {
-        expect(await locator.textContent()).toEqual(emailOrPhoneError);
-    }
-
-    async checkErrorPasswordIsDisplayed() {
-        expect(await this.errorInvalidPasswordMsg.textContent()).toEqual(passwordError);
-    }
-
-    async checkErrorInvalidEmailOrPasswordDisplayed() {
-        expect(await this.generalErrorMsg.textContent()).toEqual(emailPasswordError);
-    }
-
-    async checkRestoreErrorNoExistEmailDisplayed() {
-        expect(await this.restoreError.textContent()).toEqual(noExistEmailToRestore);
+    async checkErrorField(LocatorError, textError) {
+        expect(await LocatorError.textContent()).toEqual(textError);
     }
 
     /**
-    * @setValueInField funtion sets value in the field
+    * @setValueInField function sets value in the field
     * @param element Field that is selected for use
     * @param value Value that is set in the field
     */ 
-
+    
    async verifyInvalidEmails() {
        for (const email in usersProfiles.invalidEmails) {
             await this.setValueInField(this.emailOrPhoneField, usersProfiles.invalidEmails[email])
             await this.clickElement(this.signInBtn);
-            await this.checkErrorEmailOrPhoneIsDisplayed(this.errorInvalidEmailMsg);
+            await this.checkErrorField(this.errorEmailMsg, emailOrPhoneError)
             await this.clearValueInField(this.emailOrPhoneField);
         }
    }
@@ -75,7 +56,7 @@ export class LoginPage extends HeaderPage {
         for (const password in usersProfiles.invalidPasswords) {
             await this.setValueInField(this.passwordField, usersProfiles.invalidPasswords[password])
             await this.clickElement(this.signInBtn);
-            await this.checkErrorPasswordIsDisplayed();
+            await this.checkErrorField(this.errorPasswordMsg, passwordError)
             await this.clearValueInField(this.passwordField);
             }
     }
@@ -83,22 +64,26 @@ export class LoginPage extends HeaderPage {
         for (const number in usersProfiles.invalidPhoneNumber) {
             await this.setValueInField(this.emailOrPhoneField, usersProfiles.invalidPhoneNumber[number])
             await this.clickElement(this.signInBtn);
-            await this.checkErrorEmailOrPhoneIsDisplayed(this.errorInvalidEmailMsg)
+            await this.checkErrorField(this.errorEmailMsg, emailOrPhoneError)
             await this.clearValueInField(this.emailOrPhoneField);
             }
     }
 
+    /**
+    * @verifyInvalidEmailsToRestorePassword function verifies the invalid emails can not restore
+    */ 
+    
     async verifyInvalidEmailsToRestorePassword() {
         for (const email in usersProfiles.invalidEmails) {
             await this.setValueInField(this.resetEmailOrPhoneField, usersProfiles.invalidEmails[email])
             await this.clickElement(this.restorePasswordBtn);
-            await this.checkErrorEmailOrPhoneIsDisplayed(this.restorePasswordMsg);
-            await this.clearValueInField(this.emailOrPhoneField);
+            await this.checkErrorField(this.restorePasswordMsg, emailOrPhoneError)
+            await this.clearValueInField(this.resetEmailOrPhoneField);
          }
     }
 
     async checkPaswordIsVisible() {
-        await expect(this.passwordField).toHaveValue(usersProfiles.validUser.password); 
+        await expect(this.passwordField).toHaveAttribute('type', 'text');
     }
     
     async checkPaswordIsNotVisible() {
@@ -113,7 +98,7 @@ export class LoginPage extends HeaderPage {
         await this.clickElement(this.signInBtn);
         await this.checkElementIsNotVisible(this.authorizationPopUp)
         await this.clickElement(this.avatarBlock)
-        await this.ckeckProfileEmailVisible(email);
+        await this.checkProfileEmailVisible(email);
         await this.clickElement(this.logoutBtn);
     }
 }

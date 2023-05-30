@@ -1,5 +1,5 @@
 import { test } from '@playwright/test';
-import { LoginPage } from '../pages/LoginPage';
+import { LoginPage, emptyFieldError, generalError, noExistEmailToRestore} from '../pages/LoginPage';
 import { BasePage } from '../pages/BasePage';
 import { HeaderPage } from '../pages/HeaderPage';
 import usersProfiles from '../../resourcers/usersProfiles.json'
@@ -13,18 +13,18 @@ test('C200 - Authorization with empty fields', async ({ page }) => {
   await header.clickElement(header.loginButton);
   await login.checkElementIsVisible(login.authorizationPopUp);
   await login.clickElement(login.signInBtn);
-  await login.checkErrorEmptyFieldDisplayed(login.errorEmail);
-  await login.checkErrorEmptyFieldDisplayed(login.errorPassword);
+  await login.checkErrorField(login.errorEmailMsg, emptyFieldError)
+  await login.checkErrorField(login.errorPasswordMsg, emptyFieldError)
   await login.setValueInField(login.emailOrPhoneField, usersProfiles.validUser.email);
-  await login.checkElementIsNotVisible(login.errorEmail);
-  await login.checkErrorEmptyFieldDisplayed(login.errorPassword);
+  await login.checkElementIsNotVisible(login.errorEmailMsg);
+  await login.checkErrorField(login.errorPasswordMsg, emptyFieldError)
   await login.clickElement(login.signInBtn);
-  await login.checkErrorEmptyFieldDisplayed(login.errorPassword);
+  await login.checkErrorField(login.errorPasswordMsg, emptyFieldError)
   await login.checkElementIsVisible(login.authorizationPopUp);
   await login.clearValueInField(login.emailOrPhoneField);
-  await login.checkErrorEmptyFieldDisplayed(login.errorEmail);
+  await login.checkErrorField(login.errorEmailMsg, emptyFieldError)
   await login.setValueInField(login.passwordField, usersProfiles.validUser.password);
-  await login.checkElementIsNotVisible(login.errorPassword);
+  await login.checkElementIsNotVisible(login.errorPasswordMsg);
   await login.clickElement(login.signInBtn);
   await login.checkElementIsVisible(login.authorizationPopUp);
 });
@@ -42,7 +42,7 @@ test('C203 - Authorization with invalid credentials', async ({ page }) => {
   await login.verifyInvalidPasswords();
   await login.setValueInField(login.passwordField, usersProfiles.notExistingUser.password);
   await login.clickElement(login.signInBtn);
-  await login.checkErrorInvalidEmailOrPasswordDisplayed();
+  await login.checkErrorField(login.generalErrorMsg, generalError);
 });
 
 test('C207 - Authorization with invalid phone', async ({ page }) => {
@@ -56,7 +56,7 @@ test('C207 - Authorization with invalid phone', async ({ page }) => {
   await login.verifyInvalidPhoneNumber();
 });
 
-test('C199 - Reset the password with invalid email', async ({ page }) => {
+test('C199 - Restore the password with invalid email', async ({ page }) => {
   const login = new LoginPage(page);
   const base = new BasePage(page);
   const header = new HeaderPage(page);
@@ -66,7 +66,7 @@ test('C199 - Reset the password with invalid email', async ({ page }) => {
   await login.clickElement(login.forgotPasswordBtn);
   await login.checkElementIsVisible(login.restorePasswordModal);
   await login.clickElement(login.restorePasswordBtn);
-  await login.checkErrorEmptyFieldDisplayed(login.restorePasswordMsg)
+  await login.checkErrorField(login.restorePasswordMsg, emptyFieldError)
   await login.setValueInField(login.resetEmailOrPhoneField, usersProfiles.validUser.email);
   await login.clickElement(login.closeResetModal);
   await login.checkElementIsNotVisible(login.restorePasswordPopUp);
@@ -74,7 +74,7 @@ test('C199 - Reset the password with invalid email', async ({ page }) => {
   await login.verifyInvalidEmailsToRestorePassword();
   await login.setValueInField(login.resetEmailOrPhoneField, usersProfiles.notExistingUser.email);
   await login.clickElement(login.restorePasswordBtn);
-  await login.checkRestoreErrorNoExistEmailDisplayed();
+  await login.checkErrorField(login.restoreError, noExistEmailToRestore )
 });
 
 test('C201 - Authorization with valid email and password', async ({ page }) => {
@@ -94,10 +94,7 @@ test('C201 - Authorization with valid email and password', async ({ page }) => {
   await login.clickElement(login.signInBtn);
   await login.checkElementIsNotVisible(login.authorizationPopUp);
   await header.clickElement(header.avatarBlock);
-  await login.ckeckProfileEmailVisible(usersProfiles.validUser.email);
+  await login.checkProfileEmailVisible(usersProfiles.validUser.email);
   await header.clickElement(header.logoutBtn);
   await login.checkLoginWithValidEmails(usersProfiles.validUserUppercase.email, usersProfiles.validUserUppercase.password);
- 
-  // await login.checkLoginWithValidEmails(usersProfiles.validUserWithSpaceBegin.email, usersProfiles.validUserWithSpaceBegin.password)
-  // await login.checkLoginWithValidEmails(usersProfiles.validUserWithSpaceBEnd.email, usersProfiles.validUserWithSpaceBEnd.password)
 });

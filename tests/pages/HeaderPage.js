@@ -18,12 +18,8 @@ export class HeaderPage extends BasePage {
         this.profileEmail = page.locator('[class*="ProfileDropdownMenu_email"]');
      }
     
-    async ckeckProfileEmailVisible(email) {
+    async checkProfileEmailVisible(email) {
         expect(await this.profileEmail.textContent()).toContain(email.toLowerCase()); 
     }
-  
-    // async checkElementIsVisible(element) {
-    //     await expect(element).toBeVisible();
-    // }
 
  };

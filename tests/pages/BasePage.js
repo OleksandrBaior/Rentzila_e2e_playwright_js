@@ -34,7 +34,4 @@ export class BasePage  {
     async clearValueInField(locator) {
         await locator.clear();
     }
-
-
-    
 };

@@ -35,4 +35,8 @@ export class BasePage  {
     async clearValueInField(locator) {
         await locator.clear();
     }
+
+    async checkURL(url) {
+        await expect(this.page).toHaveURL(url);
+    }
 };

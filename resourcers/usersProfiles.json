@@ -1,23 +1,23 @@
 {
     "validUser": {
-        "email": "testuserfortesting14@gmail.com",
-        "password": "Testuser14",
-        "phoneNumber": "+380964500002"
+        "email": "testuserrentzila@gmail.com",
+        "password": "Testuser10",
+        "phoneNumber": "+380506743060"
     },
     "validUserWithSpaceBegin": {
-        "email": "   testuserfortesting14@gmail.com",
-        "password": "Testuser14",
-        "phoneNumber": "+380964500002"
+        "email": "   testuserrentzila@gmail.com",
+        "password": "Testuser10",
+        "phoneNumber": "+380506743060"
     },
     "validUserWithSpaceBEnd": {
-        "email": "testuserfortesting14@gmail.com   ",
+        "email": "testuserrentzila@gmail.com   ",
         "password": "Testuser14",
-        "phoneNumber": "+380964500002"
+        "phoneNumber": "+380506743060"
     },
     "validUserUppercase": {
-        "email": "TESTUSERFORTESTING14@GMAIL.COM",
-        "password": "Testuser14",
-        "phoneNumber": "+380964500002"
+        "email": "TESTUSERRENTZILA@GMAIL.COM",
+        "password": "Testuser10",
+        "phoneNumber": "+380506743060"
     },
     "notExistingUser": {
         "email": "testuserrentzila99@gmail.com",

@@ -1,4 +1,4 @@
-import { BasePage } from './BasePage';
+import { BasePage } from './basePage';
 import { expect } from '@playwright/test';
 
 
@@ -14,6 +14,7 @@ export class HeaderPage extends BasePage {
         this.page = page;
         this.loginButton = page.locator('div[class*="Navbar_btn_enter"]');
         this.avatarBlock = page.getByTestId('avatarBlock');
+        this.profileBtn = page.locator('[data-testid="profile"]');
         this.logoutBtn = page.locator('[data-testid="logout"]');
         this.profileEmail = page.locator('[class*="ProfileDropdownMenu_email"]');
      }

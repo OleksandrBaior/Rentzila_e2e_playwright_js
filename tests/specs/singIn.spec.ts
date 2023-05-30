@@ -1,8 +1,9 @@
 import { test } from '@playwright/test';
-import { LoginPage, emptyFieldError, generalError, noExistEmailToRestore} from '../pages/LoginPage';
-import { BasePage } from '../pages/BasePage';
-import { HeaderPage } from '../pages/HeaderPage';
-import usersProfiles from '../../resourcers/usersProfiles.json'
+import { LoginPage, emptyFieldError, generalError, noExistEmailToRestore} from '../pages/loginPage';
+import { BasePage } from '../pages/basePage';
+import { HeaderPage } from '../pages/headerPage';
+import { MyProfilePage, profileURL } from '../pages/myProfilePage';
+import usersProfiles from '../../resourcers/usersProfiles.json';
 
 test('C200 - Authorization with empty fields', async ({ page }) => {
   const login = new LoginPage(page);
@@ -97,4 +98,31 @@ test('C201 - Authorization with valid email and password', async ({ page }) => {
   await login.checkProfileEmailVisible(usersProfiles.validUser.email);
   await header.clickElement(header.logoutBtn);
   await login.checkLoginWithValidEmails(usersProfiles.validUserUppercase.email, usersProfiles.validUserUppercase.password);
+});
+
+test('C202 -  Authorization with valid phone and password', async ({ page }) => {
+  const login = new LoginPage(page);
+  const base = new BasePage(page);
+  const header = new HeaderPage(page);
+  const myProfile = new MyProfilePage(page);
+  
+  await base.navigateToMainPage();
+  await header.clickElement(header.loginButton);
+  await login.checkElementIsVisible(login.authorizationPopUp);
+  await login.setValueInField(login.emailOrPhoneField, usersProfiles.validUser.phoneNumber);
+  await base.checkElementIsNotVisible(login.errorEmailMsg)
+  await login.setValueInField(login.passwordField, usersProfiles.validUser.password);
+  await login.clickElement(login.signInBtn);
+  await login.checkElementIsNotVisible(login.authorizationPopUp);
+  await header.checkElementIsVisible(header.avatarBlock)
+  await header.clickElement(header.avatarBlock);
+  await header.clickElement(header.profileBtn);
+  await myProfile.checkURL(profileURL);
+  await myProfile.checkElementIsVisible(myProfile.verificationPhoneIcon)
+  await myProfile.checkMatchValueField(myProfile.ownerProfileNumber, usersProfiles.validUser.phoneNumber)
+  
+  // Clarify test cases in the TestRail
+  // Log out and repeat test case with valid phone:
+  // 380506743058
+  // 0506743057
 });

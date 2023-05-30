@@ -1,5 +1,5 @@
 import { expect } from '@playwright/test';
-import { HeaderPage } from './HeaderPage';
+import { HeaderPage } from './headerPage';
 import usersProfiles  from '../../resourcers/usersProfiles.json'
 
 export const emptyFieldError = 'Поле не може бути порожнім';

@@ -1,6 +1,6 @@
 import { test } from '@playwright/test';
-import { LoginPage, emptyFieldError, generalError, noExistEmailToRestore} from '../pages/LoginPage';
-import { BasePage } from '../pages/BasePage';
+import { LoginPage, emptyFieldError, generalError, noExistEmailToRestore} from '../pages/loginPage';
+import { BasePage } from '../pages/basePage';
 import { HeaderPage } from '../pages/headerPage';
 import { MyProfilePage, profileURL } from '../pages/myProfilePage';
 import usersProfiles from '../../resourcers/usersProfiles.json';
@@ -121,7 +121,7 @@ test('C202 -  Authorization with valid phone and password', async ({ page }) => 
   await myProfile.checkElementIsVisible(myProfile.verificationPhoneIcon)
   await myProfile.checkMatchValueField(myProfile.ownerProfileNumber, usersProfiles.validUser.phoneNumber)
   
-  // Clarify test cases in the TestRail
+  // Clarify test cases in the TeasRail
   // Log out and repeat test case with valid phone:
   // 380506743058
   // 0506743057

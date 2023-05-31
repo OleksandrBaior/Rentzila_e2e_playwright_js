@@ -53,6 +53,11 @@
         "numberWith11": "05067430600",
         "numberWithOtherCountry": "+10506743060",
         "numberWithout38": "+0506743060"
+    },
+    
+    "validUserForGoogle": {
+        "email": "testRentzila@gmail.com",
+        "password": "Qwerty123+"
     }
 }
 

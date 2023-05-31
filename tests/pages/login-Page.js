@@ -7,6 +7,7 @@ export const emailOrPhoneError = 'Неправильний формат email а
 export const passwordError = 'Пароль повинен містити як мінімум 1 цифру, 1 велику літеру і 1 малу літеру, також не повинен містити кирилицю та пробіли';
 export const generalError = 'Невірний e-mail або пароль';
 export const noExistEmailToRestore = 'Користувач з таким емейлом або номером телефону не верифікований в системі';
+export const authorizationGoogleURL = 'https://accounts.google.com/'
 
 export class LoginPage extends HeaderPage {
    /**
@@ -31,6 +32,10 @@ export class LoginPage extends HeaderPage {
         this.restoreError = page.locator('//*[@data-testid="restoreError"]'); 
         this.hiddenPasswordIcon = page.locator('//*[@data-testid="reactHookButton"]');
         this.restorePasswordPopUp = page.locator('//*[@data-testid="restorePasswordContainer"]');
+        this.authorizationGoogleBtn = page.locator('[class*="AuthorizationGoogle_button"]');
+        this.emailGoogleField = page.locator('#identifierId');
+        this.nextGoogleBtn = page.getByRole('button', { name: 'Next' })
+        this.passwordGoogleField = page.locator('[type="password"]');
     }
 
     async checkErrorField(LocatorError, textError) {

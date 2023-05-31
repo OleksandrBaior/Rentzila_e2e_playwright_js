@@ -17,6 +17,7 @@ export class HeaderPage extends BasePage {
         this.profileBtn = page.locator('[data-testid="profile"]');
         this.logoutBtn = page.locator('[data-testid="logout"]');
         this.profileEmail = page.locator('[class*="ProfileDropdownMenu_email"]');
+        this.logo = page.locator('a [data-testid="logo"]');
      }
     
     async checkProfileEmailVisible(email) {

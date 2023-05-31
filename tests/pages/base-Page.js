@@ -37,6 +37,6 @@ export class BasePage  {
     }
 
     async checkURL(url) {
-        await expect(this.page).toHaveURL(url);
+        await expect(this.page).toHaveURL(RegExp(`${url}`));
     }
 };

@@ -1,5 +1,5 @@
-import { test } from '@playwright/test';
-import { LoginPage, emptyFieldError, generalError, noExistEmailToRestore} from '../pages/login-Page';
+import { test, chromium} from '@playwright/test';
+import { LoginPage, emptyFieldError, generalError, noExistEmailToRestore, authorizationGoogleURL} from '../pages/login-Page';
 import { BasePage } from '../pages/base-Page';
 import { HeaderPage } from '../pages/header-Page';
 import { MyProfilePage, profileURL } from '../pages/myProfile-Page';
@@ -100,7 +100,7 @@ test('C201 - Authorization with valid email and password', async ({ page }) => {
   await login.checkLoginWithValidEmails(usersProfiles.validUserUppercase.email, usersProfiles.validUserUppercase.password);
 });
 
-test('C202 -  Authorization with valid phone and password', async ({ page }) => {
+test('C202 - Authorization with valid phone and password', async ({ page }) => {
   const login = new LoginPage(page);
   const base = new BasePage(page);
   const header = new HeaderPage(page);
@@ -120,10 +120,41 @@ test('C202 -  Authorization with valid phone and password', async ({ page }) => 
   await myProfile.checkURL(profileURL);
   await myProfile.checkElementIsVisible(myProfile.verificationPhoneIcon)
   await myProfile.checkMatchValueField(myProfile.ownerProfileNumber, usersProfiles.validUser.phoneNumber)
+
+});
+
+test('C209 - Authorization with Google (just Chrome browser)', async () => {
+  const browser = await chromium.launch({
+    args: [
+    '--disable - component - extensions -with-background - pages',
+    '--disable-gpu',
+    '--disable-dev-shm-usage',
+    '--disable-setuid-sandbox',
+    '--no-first-run',
+    '--no-sandbox',
+    '--no-zygote',
+    '--ignore-certificate-errors',
+    '--disable-extensions',
+    '--disable-infobars',
+    '--disable-blink-features=AutomationControlled',
+    '--disable-notifications',
+    '--disable-popup-blocking']
+  })
+  const context = await browser.newContext();
+  const page = await context.newPage()
   
-  
-  // Clarify test cases in the TeasRail
-  // Log out and repeat test case with valid phone:
-  // 380506743058
-  // 0506743057
+  const login = new LoginPage(page);
+  const base = new BasePage(page);
+  const header = new HeaderPage(page);
+
+  await base.navigateToMainPage();
+  await header.clickElement(header.loginButton);
+  await header.checkElementIsVisible(login.authorizationPopUp)
+  await login.clickElement(login.authorizationGoogleBtn);
+  await login.checkURL(authorizationGoogleURL);
+  await login.setValueInField(login.emailGoogleField, usersProfiles.validUserForGoogle.email);
+  await login.clickElement(login.nextGoogleBtn)
+  await login.setValueInField(login.passwordGoogleField, usersProfiles.validUserForGoogle.password);
+  await login.clickElement(login.nextGoogleBtn)
+  await login.checkElementIsVisible(header.logo);
 });

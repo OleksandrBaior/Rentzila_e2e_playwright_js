@@ -1,8 +1,8 @@
 import { test } from '@playwright/test';
-import { LoginPage, emptyFieldError, generalError, noExistEmailToRestore} from '../pages/loginPage';
-import { BasePage } from '../pages/basePage';
-import { HeaderPage } from '../pages/headerPage';
-import { MyProfilePage, profileURL } from '../pages/myProfilePage';
+import { LoginPage, emptyFieldError, generalError, noExistEmailToRestore} from '../pages/login-Page';
+import { BasePage } from '../pages/base-Page';
+import { HeaderPage } from '../pages/header-Page';
+import { MyProfilePage, profileURL } from '../pages/myProfile-Page';
 import usersProfiles from '../../resourcers/usersProfiles.json';
 
 test('C200 - Authorization with empty fields', async ({ page }) => {

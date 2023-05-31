@@ -1,4 +1,4 @@
-import { BasePage } from './basePage';
+import { BasePage } from './base-Page';
 import { expect } from '@playwright/test';
 
 export const profileURL = 'https://letkabackend.click/owner-cabinet/';

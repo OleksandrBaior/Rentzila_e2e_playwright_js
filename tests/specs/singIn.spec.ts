@@ -105,7 +105,7 @@ test('C202 -  Authorization with valid phone and password', async ({ page }) => 
   const base = new BasePage(page);
   const header = new HeaderPage(page);
   const myProfile = new MyProfilePage(page);
-  
+
   await base.navigateToMainPage();
   await header.clickElement(header.loginButton);
   await login.checkElementIsVisible(login.authorizationPopUp);
@@ -120,6 +120,7 @@ test('C202 -  Authorization with valid phone and password', async ({ page }) => 
   await myProfile.checkURL(profileURL);
   await myProfile.checkElementIsVisible(myProfile.verificationPhoneIcon)
   await myProfile.checkMatchValueField(myProfile.ownerProfileNumber, usersProfiles.validUser.phoneNumber)
+  
   
   // Clarify test cases in the TeasRail
   // Log out and repeat test case with valid phone:

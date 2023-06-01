@@ -156,5 +156,5 @@ test('C209 - Authorization with Google (just Chrome browser)', async () => {
   await login.clickElement(login.nextGoogleBtn)
   await login.setValueInField(login.passwordGoogleField, usersProfiles.validUserForGoogle.password);
   await login.clickElement(login.nextGoogleBtn)
-  await login.checkElementIsVisible(header.logo);
+  await login.checkElementIsVisible(header.avatarBlock);
 });

@@ -2,8 +2,7 @@
     "validUser": {
         "email": "testuserrentzila@gmail.com",
         "password": "Testuser10",
-        "phoneNumber": "+380506743060",
-        "newPassword": "Testuser13"
+        "phoneNumber": "+380506743060"
     },
 
     "validUserWithSpaceBegin": {
@@ -68,7 +67,8 @@
 
     "tutanotaEmail": {
         "email": "testRenzila@tutanota.com",
-        "password": "Qwerty123++"
+        "password": "Qwerty123++",
+        "newPassword": "Testuser13"
     },
 
     "invalidPhoneNumberToResore": {

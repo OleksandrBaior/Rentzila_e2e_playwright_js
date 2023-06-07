@@ -20,4 +20,10 @@ export class HeaderPage {
         await this.avatarBlock.click();
         await expect(this.profileEmail).toHaveText(email, { ignoreCase: true });
     }
+    async logOut() {
+        await this.avatarBlock.click();
+        await expect(this.profileEmail).toBeVisible();
+        await this.logoutBtn.click();
+        await expect(this.avatarBlock).not.toBeVisible();
+    }
  };

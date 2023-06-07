@@ -15,6 +15,7 @@ export class UpdatePasswordPage  {
          this.passwordField = page.locator('[data-testid="reactHookInput"]');
          this.saveNewPasswordBtn = page.locator('[data-testid="submitButton"]');
          this.errorField = page.locator('[class*="CustomReactHookInput_error_message"]');
+         this.authorizationPopUp = page.locator('div[class*="Authorization_wrapper"]');
      }
      
      async inputValue(fieldLocator, value) {
@@ -35,5 +36,15 @@ export class UpdatePasswordPage  {
             await this.expectErrorVisible(true, this.errorField, textError)
           }
     }
+    async updatePassword(newPage, upadePasswordPage, password) {
+        
+        await expect(upadePasswordPage.titleForm).toBeVisible();
+        await upadePasswordPage.checkInvalidPasswords();
+        await upadePasswordPage.inputValue(upadePasswordPage.passwordField, password);
+        await upadePasswordPage.saveNewPasswordBtn.click();
+        await expect(upadePasswordPage.authorizationPopUp).toBeVisible();
+        await newPage.close();
+    }
+  
   
  };

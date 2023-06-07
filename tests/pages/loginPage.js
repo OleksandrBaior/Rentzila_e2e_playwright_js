@@ -99,6 +99,12 @@ export class LoginPage {
             await this.expectErrorVisible(true, this.restorePasswordMsg, emailOrPhoneError);   
         }
     }
+    async logiIn(emailOrPhone, password) {
+        await this.inputValue(this.emailOrPhoneField, emailOrPhone);
+        await this.inputValue(this.passwordField, password);
+        await this.signInBtn.click();
+    }
+   
 }
 
 

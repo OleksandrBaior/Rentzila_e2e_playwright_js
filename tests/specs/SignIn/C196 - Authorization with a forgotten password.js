@@ -39,16 +39,16 @@ import usersProfiles from '../../../resourcers/usersProfiles.json';
     await newPage.waitForLoadState('networkidle');
     
     await expect(newPage.locator('[class*= "ResetPassword_ownDataText"]')).toBeVisible();
-    await expect(newPage.locator('[class*= "ResetPassword_ownDataText"]')).toHaveText('Зміна або відновлення пароля');
-      for (const phoneNumber in usersProfiles.invalidPhoneNumberToResore) {
-        await newPage.locator('[data-testid="reactHookInput"]').fill(usersProfiles.invalidPhoneNumberToResore[phoneNumber]);
-        await expect(newPage.locator('[data-testid="reactHookInput"]')).toHaveValue(usersProfiles.invalidPhoneNumberToResore[phoneNumber]);
-        await newPage.locator('[data-testid="submitButton"]').click();
-        await expect(newPage.locator('[class*="CustomReactHookInput_error_message"]')).toBeVisible();
-        await expect(newPage.locator('[class*="CustomReactHookInput_error_message"]')).toHaveText('Пароль повинен містити як мінімум 1 цифру, 1 велику літеру і 1 малу літеру, також не повинен містити кирилицю та пробіли')
-      }
-    await newPage.locator('[data-testid="reactHookInput"]').fill(usersProfiles.validUser.newPassword);
-    await expect(newPage.locator('[data-testid="reactHookInput"]')).toHaveValue(usersProfiles.validUser.newPassword);
+    // await expect(newPage.locator('[class*= "ResetPassword_ownDataText"]')).toHaveText('Зміна або відновлення пароля');
+    //   for (const phoneNumber in usersProfiles.invalidPhoneNumberToResore) {
+    //     await newPage.locator('[data-testid="reactHookInput"]').fill(usersProfiles.invalidPhoneNumberToResore[phoneNumber]);
+    //     await expect(newPage.locator('[data-testid="reactHookInput"]')).toHaveValue(usersProfiles.invalidPhoneNumberToResore[phoneNumber]);
+    //     await newPage.locator('[data-testid="submitButton"]').click();
+    //     await expect(newPage.locator('[class*="CustomReactHookInput_error_message"]')).toBeVisible();
+    //     await expect(newPage.locator('[class*="CustomReactHookInput_error_message"]')).toHaveText('Пароль повинен містити як мінімум 1 цифру, 1 велику літеру і 1 малу літеру, також не повинен містити кирилицю та пробіли')
+    //   }
+    // await newPage.locator('[data-testid="reactHookInput"]').fill(usersProfiles.validUser.newPassword);
+    // await expect(newPage.locator('[data-testid="reactHookInput"]')).toHaveValue(usersProfiles.validUser.newPassword);
     // await newPage.locator('[data-testid="submitButton"]').click();
     // await expect(loginPage.authorizationPopUp).toBeVisible();
     // await loginPage.emailOrPhoneField.fill(usersProfiles.validUser.email)

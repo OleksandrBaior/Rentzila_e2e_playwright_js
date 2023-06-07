@@ -23,6 +23,7 @@ import usersProfiles from '../../../resourcers/usersProfiles.json';
     await expect(loginPage.restorePasswordAcceptMsg).toBeVisible();
     
     await page.goto(emailPage.emailUrl);
+    await page.waitForLoadState('networkidle');
     await emailPage.emailLogIn.fill(usersProfiles.tutanotaEmail.email);
     await expect(emailPage.emailLogIn).toHaveValue(usersProfiles.tutanotaEmail.email);
     await emailPage.passwordLogIn.fill(usersProfiles.tutanotaEmail.password);
@@ -32,21 +33,22 @@ import usersProfiles from '../../../resourcers/usersProfiles.json';
     await emailPage.spanBtn.click();
     await emailPage.lastResetLetter.first().click();
     await expect(emailPage.changePassword).toBeVisible();
+    await page.keyboard.down('End') 
     
-    // const pagePromise = context.waitForEvent('page');
-    // await page.getByRole('link', { name: 'Змінити пароль' }).click();
-    // const newPage = await pagePromise;
-    // await newPage.waitForLoadState('networkidle');
+    const pagePromise = context.waitForEvent('page');
+    await emailPage.changePassword.click();
+    const newPage = await pagePromise;
+    await newPage.waitForLoadState('networkidle');
     
-    // await expect(newPage.locator('[class*= "ResetPassword_ownDataText"]')).toBeVisible();
-    // await expect(newPage.locator('[class*= "ResetPassword_ownDataText"]')).toHaveText('Зміна або відновлення пароля');
-    //   for (const phoneNumber in usersProfiles.invalidPhoneNumberToResore) {
-    //     await newPage.locator('[data-testid="reactHookInput"]').fill(usersProfiles.invalidPhoneNumberToResore[phoneNumber]);
-    //     await expect(newPage.locator('[data-testid="reactHookInput"]')).toHaveValue(usersProfiles.invalidPhoneNumberToResore[phoneNumber]);
-    //     await newPage.locator('[data-testid="submitButton"]').click();
-    //     await expect(newPage.locator('[class*="CustomReactHookInput_error_message"]')).toBeVisible();
-    //     await expect(newPage.locator('[class*="CustomReactHookInput_error_message"]')).toHaveText('Пароль повинен містити як мінімум 1 цифру, 1 велику літеру і 1 малу літеру, також не повинен містити кирилицю та пробіли')
-    //   }
+    await expect(newPage.locator('[class*= "ResetPassword_ownDataText"]')).toBeVisible();
+    await expect(newPage.locator('[class*= "ResetPassword_ownDataText"]')).toHaveText('Зміна або відновлення пароля');
+      for (const phoneNumber in usersProfiles.invalidPhoneNumberToResore) {
+        await newPage.locator('[data-testid="reactHookInput"]').fill(usersProfiles.invalidPhoneNumberToResore[phoneNumber]);
+        await expect(newPage.locator('[data-testid="reactHookInput"]')).toHaveValue(usersProfiles.invalidPhoneNumberToResore[phoneNumber]);
+        await newPage.locator('[data-testid="submitButton"]').click();
+        await expect(newPage.locator('[class*="CustomReactHookInput_error_message"]')).toBeVisible();
+        await expect(newPage.locator('[class*="CustomReactHookInput_error_message"]')).toHaveText('Пароль повинен містити як мінімум 1 цифру, 1 велику літеру і 1 малу літеру, також не повинен містити кирилицю та пробіли')
+      }
     // await newPage.locator('[data-testid="reactHookInput"]').fill(usersProfiles.validUser.newPassword);
     // await expect(newPage.locator('[data-testid="reactHookInput"]')).toHaveValue(usersProfiles.validUser.newPassword);
     // await newPage.locator('[data-testid="submitButton"]').click();

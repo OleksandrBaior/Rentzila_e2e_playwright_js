@@ -1,18 +1,13 @@
-import { BasePage } from './base-Page';
-import { expect } from '@playwright/test';
 
-
-
-export class HeaderPage extends BasePage {
+export class HeaderPage {
   
     /**
     * @param {import('@playwright/test').Page} page
     */
      
     constructor(page) {
-        super(page);
         this.page = page;
-        this.loginButton = page.locator('div[class*="Navbar_btn_enter"]');
+        this.loginBtn = page.locator('div[class*="Navbar_btn_enter"]');
         this.avatarBlock = page.getByTestId('avatarBlock');
         this.profileBtn = page.locator('[data-testid="profile"]');
         this.logoutBtn = page.locator('[data-testid="logout"]');
@@ -20,8 +15,4 @@ export class HeaderPage extends BasePage {
         this.logo = page.locator('a [data-testid="logo"]');
      }
     
-    async checkProfileEmailVisible(email) {
-        expect(await this.profileEmail.textContent()).toContain(email.toLowerCase()); 
-    }
-
  };

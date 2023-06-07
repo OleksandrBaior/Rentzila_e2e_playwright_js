@@ -2,23 +2,28 @@
     "validUser": {
         "email": "testuserrentzila@gmail.com",
         "password": "Testuser10",
-        "phoneNumber": "+380506743060"
+        "phoneNumber": "+380506743060",
+        "newPassword": "Testuser13"
     },
+
     "validUserWithSpaceBegin": {
         "email": "   testuserrentzila@gmail.com",
         "password": "Testuser10",
         "phoneNumber": "+380506743060"
     },
+
     "validUserWithSpaceBEnd": {
         "email": "testuserrentzila@gmail.com   ",
         "password": "Testuser14",
         "phoneNumber": "+380506743060"
     },
+    
     "validUserUppercase": {
         "email": "TESTUSERRENTZILA@GMAIL.COM",
         "password": "Testuser10",
         "phoneNumber": "+380506743060"
     },
+
     "notExistingUser": {
         "email": "testuserrentzila99@gmail.com",
         "password": "Testuser13"
@@ -57,7 +62,22 @@
     
     "validUserForGoogle": {
         "email": "testRentzila@gmail.com",
-        "password": "Qwerty123+"
+        "password": "Qwerty123+",
+        "phoneNumber": "+380974813310"
+    },
+
+    "tutanotaEmail": {
+        "email": "testRenzila@tutanota.com",
+        "password": "Qwerty123++"
+    },
+
+    "invalidPhoneNumberToResore": {
+        "passLess8Chars": "abcdefg1",
+        "passOnlyUppercase": "ABCDEFGT",
+        "passOnlyNumbers": "12345678",
+        "passWithoutUppercase": "abcdefg123",
+        "passLess8charsNoNumbers": "asdASDFF",
+        "passLess8charsWithSymbol": "Abcdefg@"
     }
 }
 

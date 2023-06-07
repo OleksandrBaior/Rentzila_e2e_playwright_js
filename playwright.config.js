@@ -10,8 +10,9 @@ import { defineConfig, devices } from '@playwright/test';
  * See https://playwright.dev/docs/test-configuration.
  */
 export default defineConfig({
-  testDir: './tests',
-  // testMatch: /.e2e.ts/,
+  testDir: './tests/specs/',
+  testMatch: /.js/,
+  
   timeout: 18000,
   /* Run tests in files in parallel */
   fullyParallel: true,
@@ -20,7 +21,7 @@ export default defineConfig({
   /* Retry on CI only */
   retries: process.env.CI ? 2 : 1,
   /* Opt out of parallel tests on CI. */
-  workers: process.env.CI ? 1 : undefined,
+  workers: process.env.CI ? 2 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: 'html',
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
@@ -32,6 +33,22 @@ export default defineConfig({
     trace: 'on-first-retry',
   
   },
+  launchOptions: {
+    args: [
+      '--disable - component - extensions -with-background - pages',
+      '--disable-gpu',
+      '--disable-dev-shm-usage',
+      '--disable-setuid-sandbox',
+      '--no-first-run',
+      '--no-sandbox',
+      '--no-zygote',
+      '--ignore-certificate-errors',
+      '--disable-extensions',
+      '--disable-infobars',
+      '--disable-blink-features=AutomationControlled',
+      '--disable-notifications',
+      '--disable-popup-blocking']
+},
  
   /* Configure projects for major browsers */
   projects: [

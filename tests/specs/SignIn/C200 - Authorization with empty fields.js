@@ -4,6 +4,7 @@ import { BasePage } from '../../pages/basePage';
 import { HeaderPage } from '../../pages/headerPage';
 import usersProfiles from '../../../resourcers/usersProfiles.json';
 
+
   test('C200 - Authorization with empty fields', async ({ page }) => {
     const loginPage = new LoginPage(page);
     const basePage = new BasePage(page);
@@ -27,6 +28,8 @@ import usersProfiles from '../../../resourcers/usersProfiles.json';
     await loginPage.expectErrorVisible(true, loginPage.errorEmailMsg, emptyFieldError);
     await loginPage.expectErrorVisible(false, loginPage.errorPasswordMsg, emptyFieldError);
   });
+
+ 
 
   
   

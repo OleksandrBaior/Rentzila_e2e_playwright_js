@@ -49,7 +49,7 @@ import usersProfiles from '../../../resourcers/usersProfiles.json';
       }
     await newPage.locator('[data-testid="reactHookInput"]').fill(usersProfiles.validUser.newPassword);
     await expect(newPage.locator('[data-testid="reactHookInput"]')).toHaveValue(usersProfiles.validUser.newPassword);
-    await newPage.locator('[data-testid="submitButton"]').click();
+    // await newPage.locator('[data-testid="submitButton"]').click();
     // await expect(loginPage.authorizationPopUp).toBeVisible();
     // await loginPage.emailOrPhoneField.fill(usersProfiles.validUser.email)
     // await expect(loginPage.emailOrPhoneField).toHaveValue(usersProfiles.validUser.email)

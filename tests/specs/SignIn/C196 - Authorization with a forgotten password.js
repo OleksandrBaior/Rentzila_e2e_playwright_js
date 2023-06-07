@@ -37,7 +37,7 @@ import usersProfiles from '../../../resourcers/usersProfiles.json';
     await page.getByRole('link', { name: 'Змінити пароль' }).click();
     const newPage = await pagePromise;
     await newPage.waitForLoadState('networkidle');
-
+    
     await expect(newPage.locator('[class*= "ResetPassword_ownDataText"]')).toBeVisible();
     await expect(newPage.locator('[class*= "ResetPassword_ownDataText"]')).toHaveText('Зміна або відновлення пароля');
       for (const phoneNumber in usersProfiles.invalidPhoneNumberToResore) {

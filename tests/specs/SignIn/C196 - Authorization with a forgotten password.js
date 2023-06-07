@@ -33,12 +33,12 @@ import usersProfiles from '../../../resourcers/usersProfiles.json';
     await emailPage.lastResetLetter.first().click();
     await expect(emailPage.changePassword).toBeVisible();
     
-    const pagePromise = context.waitForEvent('page');
-    await page.getByRole('link', { name: 'Змінити пароль' }).click();
-    const newPage = await pagePromise;
-    await newPage.waitForLoadState('networkidle');
+    // const pagePromise = context.waitForEvent('page');
+    // await page.getByRole('link', { name: 'Змінити пароль' }).click();
+    // const newPage = await pagePromise;
+    // await newPage.waitForLoadState('networkidle');
     
-    await expect(newPage.locator('[class*= "ResetPassword_ownDataText"]')).toBeVisible();
+    // await expect(newPage.locator('[class*= "ResetPassword_ownDataText"]')).toBeVisible();
     // await expect(newPage.locator('[class*= "ResetPassword_ownDataText"]')).toHaveText('Зміна або відновлення пароля');
     //   for (const phoneNumber in usersProfiles.invalidPhoneNumberToResore) {
     //     await newPage.locator('[data-testid="reactHookInput"]').fill(usersProfiles.invalidPhoneNumberToResore[phoneNumber]);

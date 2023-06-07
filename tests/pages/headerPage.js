@@ -1,3 +1,4 @@
+import { expect } from '@playwright/test';
 
 export class HeaderPage {
   
@@ -15,4 +16,8 @@ export class HeaderPage {
         this.logo = page.locator('a [data-testid="logo"]');
      }
     
+    async expectProfileEmailVisible(email) {
+        await this.avatarBlock.click();
+        await expect(this.profileEmail).toHaveText(email, { ignoreCase: true });
+    }
  };

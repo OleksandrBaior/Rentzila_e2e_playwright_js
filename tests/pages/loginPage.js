@@ -38,13 +38,38 @@ export class LoginPage {
         this.nextGoogleBtn = page.getByRole('button', { name: 'Next' })
         this.passwordGoogleField = page.getByRole('textbox', { name: 'Enter your password' });
         this.restorePasswordAcceptMsg = page.locator('[class*="RestorePasswordAcceptancePopup_content"]');
+        this.loginBtn = page.locator('div[class*="Navbar_btn_enter"]');
     }
 
+    async navigateLoginPopUp() {
+        await this.page.goto('');
+        await this.page.waitForLoadState('networkidle');
+        await this.loginBtn.click();
+        await expect(this.authorizationPopUp).toBeVisible();
+    }
+    async inputValue(fieldLocator, value) {
+        await fieldLocator.fill(value);
+        await expect(fieldLocator).toHaveValue(value);
+    }
+    async clickForgotPasswordBtn() {
+        await this.forgotPasswordBtn.click();
+        await expect(this.restorePasswordModal).toBeVisible();
+    }
+    async clickkHiddenPasswordIcon({visiblePassword: boolean}) {
+        if ({visiblePassword: true}) {
+            await this.hiddenPasswordIcon.click()
+            await expect(this.passwordField).toHaveAttribute('type', 'text');
+        if ({visiblePassword: false}) {
+            await this.hiddenPasswordIcon.click()
+            await expect(this.passwordField).toHaveAttribute('type', 'password');
+            }
+        }
+    }
     async expectErrorVisible(boolean, locator, textError) {
         await expect(locator).toBeVisible({ visible: boolean });
             if (boolean) {
                 await expect(locator).toHaveText(textError);
-        } 
+            } 
     }
     async checkInvalidEmails() {
         for (const email in usersProfiles.invalidEmails) {

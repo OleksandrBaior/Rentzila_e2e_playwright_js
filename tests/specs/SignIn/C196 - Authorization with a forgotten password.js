@@ -24,7 +24,8 @@ test("C196 - Authorization with a forgotten password", async ({ page, context })
     await loginPage.inputValue(emailPage.emailLogIn, usersProfiles.tutanotaEmail.email);
     await loginPage.inputValue(emailPage.passwordLogIn, usersProfiles.tutanotaEmail.password);
     await emailPage.logInBtn.click();
-    await expect(emailPage.spanBtn).toBeVisible({timeout: 7000});
+    await page.waitForLoadState('networkidle');
+    await expect(emailPage.spanBtn).toBeVisible();
     await emailPage.spanBtn.click();
     await emailPage.lastResetLetter.first().click();
     await expect(emailPage.changePassword).toBeVisible();

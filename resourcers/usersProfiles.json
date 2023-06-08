@@ -2,7 +2,9 @@
     "validUser": {
         "email": "testuserrentzila@gmail.com",
         "password": "Testuser10",
-        "phoneNumber": "+380506743060"
+        "phoneNumber": "+380506743060",
+        "phoneNumber1": "380506743060",
+        "phoneNumber2": "0506743060"
     },
 
     "validUserWithSpaceBegin": {

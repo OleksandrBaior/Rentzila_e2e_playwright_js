@@ -8,17 +8,25 @@ test('C202 - Authorization with valid phone and password', async ({ page }) => {
   const loginPage = new LoginPage(page);
   const headerPage = new HeaderPage(page);
   const myProfilePage = new MyProfilePage(page);
-  await loginPage.navigateLoginPopUp();
-  await loginPage.inputValue(loginPage.emailOrPhoneField, usersProfiles.validUser.phoneNumber);
-  await loginPage.inputValue(loginPage.passwordField, usersProfiles.validUser.password);
-  await loginPage.signInBtn.click();
-  await expect(loginPage.authorizationPopUp).not.toBeVisible();
-  await expect(headerPage.avatarBlock).toBeVisible();
-  await headerPage.expectProfileEmailVisible(usersProfiles.validUser.email)
-  await headerPage.profileBtn.click();
-  await expect(page).toHaveURL(profileURL);
-  await expect(myProfilePage.verificationPhoneIcon).toBeVisible();
-  await myProfilePage.checkProfilePhoneNumber(myProfilePage.ownerProfileNumber, usersProfiles.validUser.phoneNumber)
+
+  async function authorizationWithValidPhones(validPhone) {
+    await loginPage.navigateLoginPopUp();
+    await loginPage.inputValue(loginPage.emailOrPhoneField, validPhone);
+    await loginPage.inputValue(loginPage.passwordField, usersProfiles.validUser.password);
+    await loginPage.signInBtn.click();
+    await expect(loginPage.authorizationPopUp).not.toBeVisible();
+    await expect(headerPage.avatarBlock).toBeVisible();
+    await headerPage.expectProfileEmailVisible(usersProfiles.validUser.email)
+    await headerPage.profileBtn.click();
+    await expect(page).toHaveURL(profileURL);
+    await expect(myProfilePage.verificationPhoneIcon).toBeVisible();
+    await myProfilePage.checkProfilePhoneNumber(myProfilePage.ownerProfileNumber, validPhone)
+    await headerPage.logOut();
+  }
+  await authorizationWithValidPhones(usersProfiles.validUser.phoneNumber);
+  await authorizationWithValidPhones(usersProfiles.validUser.phoneNumber1);
+  await authorizationWithValidPhones(usersProfiles.validUser.phoneNumber2);
+
   });
 
   

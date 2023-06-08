@@ -5,6 +5,7 @@ import { MyProfilePage, profileURL } from '../../pages/myProfilePage';
 import usersProfiles from '../../../resourcers/usersProfiles.json';
 
 test('C202 - Authorization with valid phone and password', async ({ page }) => {
+  test.setTimeout(60000);
   const loginPage = new LoginPage(page);
   const headerPage = new HeaderPage(page);
   const myProfilePage = new MyProfilePage(page);

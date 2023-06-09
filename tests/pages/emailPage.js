@@ -26,6 +26,14 @@ export class EmailPage {
         this.lastResetLetter = page.getByText('kukol.dbcp.django@gmail.com')
     }
 
+    async confirmResetPassword() {
+        await this.logInBtn.click();
+        await this.spanBtn.click();
+        await this.lastResetLetter.first().click();
+    } 
+
+
+
   async verifyEmail() {
     //після того як натиснули зареєструватися на рензіллі, чекаємо поки відправиться лист
       await this.page.waitForTimeout(5000);

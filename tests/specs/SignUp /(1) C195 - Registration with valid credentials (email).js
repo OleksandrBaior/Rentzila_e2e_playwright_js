@@ -16,5 +16,6 @@ test('C195 - Registration with valid credentials (email)', async ({ page }) => {
     await loginPage.passwordField.fill(usersProfiles.validUser.password);
     await loginPage.registrationBtn.click();
     await emailPage.verifyEmail();
+    await headerPage.logOut()
     
 });

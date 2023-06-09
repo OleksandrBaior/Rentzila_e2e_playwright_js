@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { test } from '@playwright/test';
 import { LoginPage, generalError } from '../../pages/loginPage';
 import usersProfiles from '../../../resourcers/usersProfiles.json';
 

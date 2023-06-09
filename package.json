@@ -21,6 +21,8 @@
     "@playwright/test": "^1.34.3"
   },
   "dependencies": {
-    "eslint": "^8.41.0"
+    "axios": "^1.4.0",
+    "eslint": "^8.41.0",
+    "random-email": "^1.0.3"
   }
 }

@@ -1,4 +1,8 @@
 {
+    "adminAccount": {
+        "email": "123@gmail.com",
+        "password": "12345Qwerty!"
+    },
     "validUser": {
         "email": "testuserrentzila@gmail.com",
         "password": "Testuser10",

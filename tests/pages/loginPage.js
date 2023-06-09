@@ -40,7 +40,7 @@ export class LoginPage {
         this.restorePasswordAcceptMsg = page.locator('[class*="RestorePasswordAcceptancePopup_content"]');
         this.loginBtn = page.locator('div[class*="Navbar_btn_enter"]');
         this.registrationNoAccountBtn = page.locator('[data-testid="switcher"]');
-        this.registrationBtn = page.locator('[class*="LoginForm_submitBtn"]')
+        this.registrationBtn = page.locator('[class*="LoginForm_submitBtn"]');
     }
 
     async navigateLoginPopUp() {

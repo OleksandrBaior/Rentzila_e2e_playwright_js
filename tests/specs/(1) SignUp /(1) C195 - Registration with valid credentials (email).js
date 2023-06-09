@@ -25,7 +25,8 @@ test('C195 - Registration with valid credentials (email)', async ({ page }) => {
     await expect(adminPage.adminPanel).toBeVisible();
     await adminPage.users.click();
     await expect(adminPage.userTitle).toBeVisible();
-    await adminPage.searchUserField.fill(emailForVarifycation,);
-    await expect(adminPage.firstRowUsersTable.first()).toHaveText(emailForVarifycation);
-
+    await adminPage.checkUserExist(true);
+    await adminPage.deleteUser(await adminPage.userID.textContent());
+    await page.reload();
+    await adminPage.checkUserExist(false);
 });

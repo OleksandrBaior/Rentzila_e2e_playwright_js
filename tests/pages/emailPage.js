@@ -27,7 +27,7 @@ export class EmailPage {
     } 
 
   async verifyEmail() {
-      await this.page.waitForTimeout(5000);
+      await this.page.waitForTimeout(7000);
       try {
         await axios.get(
             `https://mailsac.com/api/addresses/${emailForVarifycation}/messages`,

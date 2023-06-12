@@ -57,15 +57,9 @@ export class LoginPage {
         await this.forgotPasswordBtn.click();
         await expect(this.restorePasswordModal).toBeVisible();
     }
-    async clickkHiddenPasswordIcon({visiblePassword: boolean}) {
-        if ({visiblePassword: true}) {
-            await this.hiddenPasswordIcon.click()
-            await expect(this.passwordField).toHaveAttribute('type', 'text');
-        if ({visiblePassword: false}) {
-            await this.hiddenPasswordIcon.click()
-            await expect(this.passwordField).toHaveAttribute('type', 'password');
-            }
-        }
+    async clickkHiddenPasswordIcon(boolean) {
+        await this.hiddenPasswordIcon.click()
+        await expect(this.passwordField).toHaveAttribute('type', boolean ? 'text' : 'password');
     }
     async expectErrorVisible(boolean, locator, textError) {
         await expect(locator).toBeVisible({ visible: boolean });

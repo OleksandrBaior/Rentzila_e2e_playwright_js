@@ -9,8 +9,8 @@ test('C201 - Authorization with valid email and password', async ({ page }) => {
   await loginPage.navigateLoginPopUp();
   await loginPage.inputValue(loginPage.emailOrPhoneField, usersProfiles.validUser.email);
   await loginPage.inputValue(loginPage.passwordField, usersProfiles.validUser.password);
-  await loginPage.clickkHiddenPasswordIcon({visiblePassword: true});
-  await loginPage.clickkHiddenPasswordIcon({visiblePassword: false});
+  await loginPage.clickkHiddenPasswordIcon(true);
+  await loginPage.clickkHiddenPasswordIcon(false);
   await loginPage.signInBtn.click();
   await expect(loginPage.authorizationPopUp).not.toBeVisible();
   await expect(headerPage.avatarBlock).toBeVisible();

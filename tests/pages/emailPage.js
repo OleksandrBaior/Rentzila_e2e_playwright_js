@@ -40,6 +40,7 @@ export class EmailPage {
           console.log("Лінк для підтвердження - " + response.data[0].links[0]); 
           const confirmationLink = (response.data[0].links[0]).toString();
           await this.page.goto(confirmationLink);
+          await this.page.waitForLoadState('networkidle');  
     })} catch (error) {
             console.log(error);
     }}

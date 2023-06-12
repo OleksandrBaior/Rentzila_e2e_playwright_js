@@ -70,10 +70,10 @@ export class AdminPage {
     async checkUserExist(boolean, email) {
         await this.searchUserField.fill(email);
         await this.page.waitForResponse(`https://letkabackend.click/api/crm/profiles/?page=1&size=10&id=asc&search=${email}&role=default`)
-            .then(async response => {
-                const data = await response.json();
-                expect(data.count).toBe(1);
-            })
+        .then(async response => {
+            const data = await response.json();
+            expect(data.count).toBe( boolean ? 1 : 0 );
+        })
         if (boolean) {
             await expect(this.userEmailTable).toHaveText(email);
         }

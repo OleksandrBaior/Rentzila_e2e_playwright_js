@@ -8,7 +8,8 @@ export const passwordErrorLess8Chars = 'Будь ласка, введіть як
 export const generalError = 'Невірний e-mail або пароль';
 export const noExistEmailToRestore = 'Користувач з таким емейлом або номером телефону не верифікований в системі';
 export const restoreMsg = 'На Ваш е-mail надіслані подальші інструкції по відновленню пароля від акаунта'
-export const authorizationGoogleURL = 'https://accounts.google.com/'
+export const authorizationGoogleURL = 'https://accounts.google.com/';
+export const userRegistratedError = 'Профіль з таким емейлом вже існує';
 
 export class LoginPage {
    /**
@@ -43,6 +44,7 @@ export class LoginPage {
         this.registrationBtn = page.locator('[class*="LoginForm_submitBtn"]');
         this.errorRegistrationPasswordMsg = page.locator('//form/div[2]/p');
         this.errorRegistrationEmailMsg = page.locator('//form/div[1]/p');
+        this.userRegistratedError = page.locator('[class*="LoginForm_error"]');
     }
 
     async navigateLoginPopUp() {

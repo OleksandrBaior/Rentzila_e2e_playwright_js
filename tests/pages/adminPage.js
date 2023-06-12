@@ -17,8 +17,9 @@ export class AdminPage {
         this.users = page.locator('[href="/admin/users/"]');
         this.userTitle = page.locator('[class*="AdminLayout_title"]');
         this.searchUserField = page.getByTestId('input');
-        this.userEmailTable = page.locator('//table/tbody/tr/td[1]').first();
-        this.userID = page.locator('#enhanced-table-checkbox-0').first();
+        this.userEmailTable = page.locator('//table/tbody/tr/td[1]');
+        this.userID = page.locator('#enhanced-table-checkbox-0');
+        this.tableBody = page.locator('//*[@id="__next"]/div/div[2]/div[2]/div[2]/table/tbody')
     }
     
     async getAdminToken() {
@@ -66,14 +67,18 @@ export class AdminPage {
             });
     }
 
-    async checkUserExist(boolean,email) {
+    async checkUserExist(boolean, email) {
+        await this.searchUserField.fill(email);
+        await this.page.waitForResponse(`https://letkabackend.click/api/crm/profiles/?page=1&size=10&id=asc&search=${email}&role=default`)
+            .then(async response => {
+                const data = await response.json();
+                expect(data.count).toBe(1);
+            })
         if (boolean) {
-            await this.searchUserField.fill(email);
             await expect(this.userEmailTable).toHaveText(email);
         }
         else {
-            await this.searchUserField.fill(email);
-            await expect(this.userEmailTable).not.toHaveText(email);
+            await expect(this.userEmailTable).not.toBeVisible();
         }
     }
 

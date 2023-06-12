@@ -11,7 +11,6 @@ test('C195 - Registration with valid credentials (email)', async ({ page }) => {
     const emailPage = new EmailPage(page);
     const headerPage = new HeaderPage(page);
     const adminPage = new AdminPage(page);
-
     await loginPage.navigateLoginPopUp();
     await loginPage.registrationNoAccountBtn.click();
     await loginPage.inputValue(loginPage.emailOrPhoneField, emailForVarifycation)

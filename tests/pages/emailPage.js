@@ -1,7 +1,7 @@
 import axios from "axios";
 var randomEmail = require('random-email');
 
-export const emailForVarifycation= randomEmail({ domain: "mailsac.com" }); //будь який тестовий емейл але з доменом мейлсаку
+export const emailForVarifycation= randomEmail({ domain: "mailsac.com" }); 
 
 export class EmailPage {
   

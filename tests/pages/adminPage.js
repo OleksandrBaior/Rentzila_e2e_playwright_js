@@ -1,7 +1,7 @@
 const axios = require('axios');
 import { expect } from '@playwright/test';
 import usersProfiles from '../../resourcers/usersProfiles.json';
-import { emailForVarifycation } from '../pages/emailPage';
+
 
 export const adminURL = 'https://letkabackend.click/admin/';
 
@@ -66,14 +66,14 @@ export class AdminPage {
             });
     }
 
-    async checkUserExist(boolean) {
+    async checkUserExist(boolean,email) {
         if (boolean) {
-            await this.searchUserField.fill(emailForVarifycation);
-            await expect(this.userEmailTable).toHaveText(emailForVarifycation);
+            await this.searchUserField.fill(email);
+            await expect(this.userEmailTable).toHaveText(email);
         }
         else {
-            await this.searchUserField.fill(emailForVarifycation);
-            await expect(this.userEmailTable).not.toHaveText(emailForVarifycation);
+            await this.searchUserField.fill(email);
+            await expect(this.userEmailTable).not.toHaveText(email);
         }
     }
 

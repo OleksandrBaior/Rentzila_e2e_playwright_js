@@ -3,7 +3,8 @@ import { LoginPage } from '../../pages/loginPage';
 import usersProfiles from '../../../resourcers/usersProfiles.json';
 import { EmailPage, emailForVarifycation } from '../../pages/emailPage';
 import { HeaderPage } from '../../pages/headerPage';
-import { AdminPage, adminURL } from '../../pages/adminPage';
+import { AdminPage } from '../../pages/adminPage';
+
 
 test('C195 - Registration with valid credentials (email)', async ({ page }) => {
     const loginPage = new LoginPage(page);
@@ -25,8 +26,8 @@ test('C195 - Registration with valid credentials (email)', async ({ page }) => {
     await expect(adminPage.adminPanel).toBeVisible();
     await adminPage.users.click();
     await expect(adminPage.userTitle).toBeVisible();
-    await adminPage.checkUserExist(true);
+    await adminPage.checkUserExist(true, emailForVarifycation);
     await adminPage.deleteUser(await adminPage.userID.textContent());
     await page.reload();
-    await adminPage.checkUserExist(false);
+    await adminPage.checkUserExist(false, emailForVarifycation);
 });

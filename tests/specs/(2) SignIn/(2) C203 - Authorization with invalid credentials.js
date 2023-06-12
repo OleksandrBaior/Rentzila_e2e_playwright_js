@@ -12,6 +12,7 @@ test('C203 - Authorization with invalid credentials', async ({ page }) => {
   await loginPage.expectErrorVisible(true, loginPage.generalErrorMsg, generalError);
   await loginPage.inputValue(loginPage.emailOrPhoneField, usersProfiles.validUser.email);
   await loginPage.checkInvalidPasswords();
+  await loginPage.checkInvalidPasswords();
 })
 
   

@@ -20,7 +20,7 @@ test("C196 - Authorization with a forgotten password", async ({ page, context })
     await loginPage.expectErrorVisible(true, loginPage.restorePasswordAcceptMsg, restoreMsg)  
 
     await page.goto(emailPage.emailUrl);
-    await page.waitForLoadState('networkidle');
+    await page.waitForLoadState();
     await loginPage.inputValue(emailPage.emailLogIn, usersProfiles.tutanotaEmail.email);
     await loginPage.inputValue(emailPage.passwordLogIn, usersProfiles.tutanotaEmail.password);
     await emailPage.confirmResetPassword();
@@ -29,7 +29,7 @@ test("C196 - Authorization with a forgotten password", async ({ page, context })
     const pagePromise = context.waitForEvent('page');
     await emailPage.changePassword.click();
     const newPage = await pagePromise;
-    await newPage.waitForLoadState('networkidle');
+    await newPage.waitForLoadState();
     const upadePasswordPage = new UpdatePasswordPage(newPage);
     
     await expect(upadePasswordPage.titleForm).toBeVisible();

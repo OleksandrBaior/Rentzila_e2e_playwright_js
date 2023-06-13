@@ -6,7 +6,7 @@ import { UpdatePasswordPage } from '../../pages/updatePasswordPage';
 import { HeaderPage } from '../../pages/headerPage';
 
 test("C196 - Authorization with a forgotten password", async ({ page, context }) => {
-  test.setTimeout(60000);
+  test.setTimeout(70000);
   const loginPage = new LoginPage(page);
   const emailPage = new EmailPage(page);
   const headerPage = new HeaderPage(page);

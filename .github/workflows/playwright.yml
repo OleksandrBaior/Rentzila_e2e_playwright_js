@@ -21,7 +21,7 @@ jobs:
     - name: Run Playwright tests -chromium
       run: npx playwright test --project=chromium
     - name: Run Playwright tests -firefox
-      run: npx playwright test --ui --project=firefox
+      run: npx playwright test --project=firefox
     - name: Run Playwright tests -webkit
       run: npx playwright test --project=webkit
     - uses: actions/upload-artifact@v3

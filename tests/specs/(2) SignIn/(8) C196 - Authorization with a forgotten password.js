@@ -5,53 +5,40 @@ import usersProfiles from '../../../resourcers/usersProfiles.json';
 import { UpdatePasswordPage } from '../../pages/updatePasswordPage';  
 import { HeaderPage } from '../../pages/headerPage';
 
-test("C196 - Authorization with a forgotten password", async ({ page, context }) => {
-  test.setTimeout(70000);
+test("C196 - Authorization with a forgotten password", async ({ page }) => {
+  test.setTimeout(40000);
   const loginPage = new LoginPage(page);
   const emailPage = new EmailPage(page);
   const headerPage = new HeaderPage(page);
+  const updatePasswordPage = new UpdatePasswordPage(page);
 
   async function updatePassword(oldPassword, newPassword) {
     await loginPage.navigateLoginPopUp();
     await loginPage.forgotPasswordBtn.click();
     await expect(loginPage.restorePasswordModal).toBeVisible();
-    await loginPage.inputValue(loginPage.resetEmailOrPhoneField, usersProfiles.tutanotaEmail.email);
+    await loginPage.inputValue(loginPage.resetEmailOrPhoneField, usersProfiles.restorePasswordEmail.email);
     await loginPage.restorePasswordBtn.click();
     await loginPage.expectErrorVisible(true, loginPage.restorePasswordAcceptMsg, restoreMsg)  
 
-    await page.goto(emailPage.emailUrl);
-    await page.waitForLoadState();
-    await loginPage.inputValue(emailPage.emailLogIn, usersProfiles.tutanotaEmail.email);
-    await loginPage.inputValue(emailPage.passwordLogIn, usersProfiles.tutanotaEmail.password);
-    await emailPage.confirmResetPassword();
-    await expect(emailPage.changePassword).toBeVisible();
-    await page.keyboard.down('End'); 
-    const pagePromise = context.waitForEvent('page');
-    await emailPage.changePassword.click();
-    const newPage = await pagePromise;
-    await newPage.waitForLoadState();
-    const upadePasswordPage = new UpdatePasswordPage(newPage);
-    
-    await expect(upadePasswordPage.titleForm).toBeVisible();
-    await upadePasswordPage.checkInvalidPasswords();
-    await upadePasswordPage.inputValue(upadePasswordPage.passwordField, newPassword);
-    await upadePasswordPage.saveNewPasswordBtn.click();
-    await expect(upadePasswordPage.authorizationPopUp).toBeVisible();
-    await newPage.close();
-  
-    await loginPage.navigateLoginPopUp();
-    await loginPage.logiIn(usersProfiles.tutanotaEmail.email, oldPassword);
+    await emailPage.verifyEmail(usersProfiles.restorePasswordEmail.email);
+
+    await expect(updatePasswordPage.titleForm).toBeVisible();
+    await updatePasswordPage.checkInvalidPasswords();
+    await updatePasswordPage.inputValue(updatePasswordPage.passwordField, newPassword);
+    await updatePasswordPage.saveNewPasswordBtn.click();
+    await expect(updatePasswordPage.authorizationPopUp).toBeVisible();
+    await loginPage.logiIn(usersProfiles.restorePasswordEmail.email, oldPassword);
     await loginPage.expectErrorVisible(true, loginPage.generalErrorMsg, generalError);
-    await loginPage.logiIn(usersProfiles.tutanotaEmail.email, newPassword);
-    await headerPage.expectProfileEmailVisible(usersProfiles.tutanotaEmail.email);
-    await headerPage.avatarBlock.click({clickCount: 2});
+    await loginPage.logiIn(usersProfiles.restorePasswordEmail.email, newPassword);
+    await headerPage.expectProfileEmailVisible(usersProfiles.restorePasswordEmail.email);
     await headerPage.logoutBtn.click();
   }
 
-await updatePassword(usersProfiles.tutanotaEmail.password, usersProfiles.tutanotaEmail.newPassword);
-await updatePassword(usersProfiles.tutanotaEmail.newPassword, usersProfiles.tutanotaEmail.password);
+await updatePassword(usersProfiles.restorePasswordEmail.password, usersProfiles.restorePasswordEmail.newPassword);
+await updatePassword(usersProfiles.restorePasswordEmail.newPassword, usersProfiles.restorePasswordEmail.password);
   
 })
+
 
   
   

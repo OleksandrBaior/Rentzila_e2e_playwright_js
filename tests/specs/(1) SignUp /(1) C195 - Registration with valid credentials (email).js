@@ -17,7 +17,7 @@ test('C195 - Registration with valid credentials (email)', async ({ page }) => {
     await loginPage.inputValue(loginPage.emailOrPhoneField, emailForVarifycation)
     await loginPage.inputValue(loginPage.passwordField, usersProfiles.validUser.password);
     await loginPage.registrationBtn.click();
-    await emailPage.verifyEmail();
+    await emailPage.verifyEmail(emailForVarifycation);
     await headerPage.logOut();
     await loginPage.loginBtn.click();
     await loginPage.logiIn(usersProfiles.adminAccount.email, usersProfiles.adminAccount.password);

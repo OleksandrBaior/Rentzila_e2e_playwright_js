@@ -71,8 +71,8 @@
         "phoneNumber": "+380974813310"
     },
 
-    "tutanotaEmail": {
-        "email": "testRenzila@tutanota.com",
+    "restorePasswordEmail": {
+        "email": "restore@mailsac.com",
         "password": "Qwerty123++",
         "newPassword": "Testuser13"
     },

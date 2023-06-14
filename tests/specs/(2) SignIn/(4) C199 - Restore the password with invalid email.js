@@ -9,12 +9,12 @@ test('C199 - Restore the password with invalid email', async ({ page }) => {
   await loginPage.restorePasswordBtn.click();
   await loginPage.expectErrorVisible(true, loginPage.restorePasswordMsg, emptyFieldError);
   await loginPage.inputValue(loginPage.resetEmailOrPhoneField, usersProfiles.validUser.email);
-  await loginPage.closeResetModal.click();
+  await loginPage.closeResetPopUp.click();
   await expect(loginPage.restorePasswordModal).not.toBeVisible(); 
   await loginPage.clickForgotPasswordBtn();
   await loginPage.checkInvalidEmailsToRestorePassword();
   await loginPage.inputValue(loginPage.resetEmailOrPhoneField, usersProfiles.notExistingUser.email);
-  await loginPage.restorePasswordBtn.click();
+  await page.keyboard.press('Enter');
   await loginPage.expectErrorVisible(true, loginPage.restoreError, noExistEmailToRestore);
 });
 

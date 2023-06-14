@@ -1,0 +1,88 @@
+{
+    "validUser": {
+        "email": "testuserrentzila@gmail.com",
+        "password": "Testuser10",
+        "phoneNumber": "+380506743060",
+        "phoneNumber1": "380506743060",
+        "phoneNumber2": "0506743060"
+    },
+
+    "validUserWithSpaceBegin": {
+        "email": "   testuserrentzila@gmail.com",
+        "password": "Testuser10",
+        "phoneNumber": "+380506743060"
+    },
+
+    "validUserWithSpaceBEnd": {
+        "email": "testuserrentzila@gmail.com   ",
+        "password": "Testuser14",
+        "phoneNumber": "+380506743060"
+    },
+    
+    "validUserUppercase": {
+        "email": "TESTUSERRENTZILA@GMAIL.COM",
+        "password": "Testuser10",
+        "phoneNumber": "+380506743060"
+    },
+
+    "notExistingUser": {
+        "email": "testuserrentzila99@gmail.com",
+        "password": "Testuser13"
+    },
+
+    "invalidEmails": {
+        "emailWithSpace": "testuser  rentzila@gmail.com",
+        "emailCyrillic": "еуіегіуккутеяшдф",
+        "emailWithout@": "testuserrentzilagmail.com",
+        "emailWithoutDot": "testuserrentzila@gmailcom",
+        "emailWithCom": "testuserrentzila@gmail",
+        "emailWihoutGmail": "testuserrentzila@.com",
+        "emailWithout@gmail.com": "testuserrentzila",
+        "emailWith@@": "testuserrentzila@@gmail.com"  
+    },
+
+    "invalidPasswords": {
+        "passwordWithSpace": "Testuser14  ",
+        "passwordWithBeginningSpcae": "  Testuser14",
+        "passwordWithUppercase": "testuser14",
+        "passwordWithoutLowercace": "TESTUSER14",
+        "passwordCyrillic": "Еуіегіук10"
+    },
+
+    "invalidPhoneNumber": {
+        "numberWithoutCode": "964500002",
+        "numberWithoutLast": "096450000",
+        "numberWith-": "+38096-45-00-002",
+        "numberWithSpaces": "+38096 45 00 002",
+        "numberWith()": "+38(096)4500002",
+        "numberWithout+380andWith()": "(96)4500002",
+        "numberWith11": "05067430600",
+        "numberWithOtherCountry": "+10506743060",
+        "numberWithout38": "+0506743060"
+    },
+    
+    "validUserForGoogle": {
+        "email": "testRentzila@gmail.com",
+        "password": "Qwerty123+",
+        "phoneNumber": "+380974813310"
+    },
+
+    "tutanotaEmail": {
+        "email": "testRenzila@tutanota.com",
+        "password": "Qwerty123++",
+        "newPassword": "Testuser13"
+    },
+
+    "invalidPhoneNumberToResore": {
+        "passLess8Chars": "abcdefg1",
+        "passOnlyUppercase": "ABCDEFGT",
+        "passOnlyNumbers": "12345678",
+        "passWithoutUppercase": "abcdefg123",
+        "passLess8charsNoNumbers": "asdASDFF",
+        "passLess8charsWithSymbol": "Abcdefg@"
+    }
+}
+
+ 
+
+

@@ -30,5 +30,6 @@ test('C195 - Registration with valid credentials (email)', async ({ page }) => {
     await adminPage.checkUserExist(true, emailForVarifycation);
     await adminPage.deleteUser(await adminPage.userID.textContent());
     await page.reload();
+    await page.waitForLoadState()
     await adminPage.checkUserExist(false, emailForVarifycation);
 });

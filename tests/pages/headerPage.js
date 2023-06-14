@@ -14,6 +14,7 @@ export class HeaderPage {
         this.logoutBtn = page.locator('[data-testid="logout"]');
         this.profileEmail = page.locator('[class*="ProfileDropdownMenu_email"]');
         this.logo = page.locator('a [data-testid="logo"]');
+        this.superAdminIcon = page.getByTestId('superuserIcon_Navbar').getByRole('img')
      }
     
     async expectProfileEmailVisible(email) {

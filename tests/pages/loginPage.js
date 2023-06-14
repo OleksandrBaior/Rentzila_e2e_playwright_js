@@ -8,7 +8,8 @@ export const passwordErrorLess8Chars = 'Будь ласка, введіть як
 export const generalError = 'Невірний e-mail або пароль';
 export const noExistEmailToRestore = 'Користувач з таким емейлом або номером телефону не верифікований в системі';
 export const restoreMsg = 'На Ваш е-mail надіслані подальші інструкції по відновленню пароля від акаунта'
-export const authorizationGoogleURL = 'https://accounts.google.com/'
+export const authorizationGoogleURL = 'https://accounts.google.com/';
+export const userRegistratedError = 'Профіль з таким емейлом вже існує';
 
 export class LoginPage {
    /**
@@ -29,7 +30,7 @@ export class LoginPage {
         this.restorePasswordBtn = page.locator('button[class*="RestorePassword"]'); 
         this.restorePasswordMsg = page.locator('form[class*="RestorePasswordPopup_form_"] p');
         this.resetEmailOrPhoneField = page.locator('//*[@id=""]');
-        this.closeResetModal = page.locator('[data-testid="restorePasswordCross"] [data-testid="crossDeleteIcon"]');
+        this.closeResetPopUp = page.locator('[data-testid="restorePasswordCross"] [data-testid="crossDeleteIcon"]');
         this.restoreError = page.locator('//*[@data-testid="restoreError"]'); 
         this.hiddenPasswordIcon = page.locator('//*[@data-testid="reactHookButton"]');
         this.restorePasswordPopUp = page.locator('//*[@data-testid="restorePasswordContainer"]');
@@ -39,20 +40,25 @@ export class LoginPage {
         this.passwordGoogleField = page.getByRole('textbox', { name: 'Enter your password' });
         this.restorePasswordAcceptMsg = page.locator('[class*="RestorePasswordAcceptancePopup_content"]');
         this.loginBtn = page.locator('div[class*="Navbar_btn_enter"]');
-        this.registrationNoAccountBtn = page.locator('[data-testid="switcher"]');
-        this.registrationBtn = page.locator('[class*="LoginForm_submitBtn"]')
+        this.registrationlink = page.locator('[data-testid="switcher"]');
+        this.registrationBtn = page.locator('[class*="LoginForm_submitBtn"]');
+        this.errorRegistrationPasswordMsg = page.locator('//form/div[2]/p');
+        this.errorRegistrationEmailMsg = page.locator('//form/div[1]/p');
+        this.userRegistratedError = page.locator('[class*="LoginForm_error"]');
     }
 
     async navigateLoginPopUp() {
         await this.page.goto('');
-        await this.page.waitForLoadState('networkidle');
+        await this.page.waitForLoadState();
         await this.loginBtn.click();
         await expect(this.authorizationPopUp).toBeVisible();
     }
+
     async inputValue(fieldLocator, value) {
         await fieldLocator.fill(value);
         await expect(fieldLocator).toHaveValue(value);
     }
+
     async clickForgotPasswordBtn() {
         await this.forgotPasswordBtn.click();
         await expect(this.restorePasswordModal).toBeVisible();
@@ -61,6 +67,7 @@ export class LoginPage {
         await this.hiddenPasswordIcon.click()
         await expect(this.passwordField).toHaveAttribute('type', boolean ? 'text' : 'password');
     }
+
     async expectErrorVisible(boolean, locator, textError) {
         await expect(locator).toBeVisible({ visible: boolean });
             if (boolean) {
@@ -74,6 +81,7 @@ export class LoginPage {
             await this.expectErrorVisible(true, this.errorEmailMsg, emailOrPhoneError);   
         }
     }   
+
     async checkInvalidPasswords() {
         for (const password in usersProfiles.invalidPasswords) {
             await this.passwordField.fill(usersProfiles.invalidPasswords[password]);
@@ -88,6 +96,7 @@ export class LoginPage {
             await this.expectErrorVisible(true, this.errorEmailMsg, emailOrPhoneError);   
         }
     }
+
     async checkInvalidEmailsToRestorePassword() {
         for (const email in usersProfiles.invalidPhoneNumber) {
             await this.resetEmailOrPhoneField.fill(usersProfiles.invalidPhoneNumber[email]);
@@ -95,6 +104,7 @@ export class LoginPage {
             await this.expectErrorVisible(true, this.restorePasswordMsg, emailOrPhoneError);   
         }
     }
+    
     async logiIn(emailOrPhone, password) {
         await this.inputValue(this.emailOrPhoneField, emailOrPhone);
         await this.inputValue(this.passwordField, password);

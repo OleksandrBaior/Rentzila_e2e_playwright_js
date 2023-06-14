@@ -24,7 +24,7 @@ test('C201 - Authorization with valid email and password', async ({ page }) => {
   await loginPage.signInBtn.click();
   await expect(loginPage.authorizationPopUp).not.toBeVisible();
   await expect(headerPage.avatarBlock).toBeVisible();
-  await headerPage.expectProfileEmailVisible(usersProfiles.validUserUppercase.email)
+  await headerPage.expectProfileEmailVisible(usersProfiles.validUserUppercase.email);
 });
 
   

@@ -2,7 +2,7 @@ import { test } from '@playwright/test';
 import { LoginPage } from '../../pages/loginPage';
 import usersProfiles from '../../../resourcers/usersProfiles.json';
 
-test('C528 -  Registration with invalid credentials', async ({ page }) => {
+test('C528 - Registration with invalid credentials', async ({ page }) => {
     const loginPage = new LoginPage(page);
     
     await loginPage.navigateLoginPopUp();

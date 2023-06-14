@@ -4,6 +4,7 @@ import usersProfiles from '../../../resourcers/usersProfiles.json';
 
 test('C209 - Authorization with Google', async ({ page }) => {
   const loginPage = new LoginPage(page);
+  
   await loginPage.navigateLoginPopUp();
   await loginPage.authorizationGoogleBtn.click();
   await expect(loginPage.emailGoogleField).toBeVisible();

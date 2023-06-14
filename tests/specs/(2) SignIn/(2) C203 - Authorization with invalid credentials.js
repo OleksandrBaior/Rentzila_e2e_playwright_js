@@ -4,6 +4,7 @@ import usersProfiles from '../../../resourcers/usersProfiles.json';
 
 test('C203 - Authorization with invalid credentials', async ({ page }) => {
   const loginPage = new LoginPage(page);
+  
   await loginPage.navigateLoginPopUp();
   await loginPage.inputValue(loginPage.passwordField, usersProfiles.validUser.password);
   await loginPage.checkInvalidEmails();

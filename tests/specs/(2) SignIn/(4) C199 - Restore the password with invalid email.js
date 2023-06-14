@@ -4,6 +4,7 @@ import usersProfiles from '../../../resourcers/usersProfiles.json';
 
 test('C199 - Restore the password with invalid email', async ({ page }) => {
   const loginPage = new LoginPage(page);
+  
   await loginPage.navigateLoginPopUp();
   await loginPage.clickForgotPasswordBtn()
   await loginPage.restorePasswordBtn.click();

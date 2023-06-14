@@ -8,8 +8,9 @@ test('C191 - Registration with already registered email', async ({ page }) => {
     const loginPage = new LoginPage(page);
     const headerPage = new HeaderPage(page);
     const adminPage = new AdminPage(page);
+    
     await loginPage.navigateLoginPopUp();
-    await loginPage.registrationNoAccountBtn.click();
+    await loginPage.registrationlink.click();
     await loginPage.inputValue(loginPage.emailOrPhoneField, usersProfiles.validUser.email);
     await loginPage.inputValue(loginPage.passwordField, usersProfiles.validUser.password);
     await loginPage.signInBtn.click();

@@ -40,7 +40,7 @@ export class LoginPage {
         this.passwordGoogleField = page.getByRole('textbox', { name: 'Enter your password' });
         this.restorePasswordAcceptMsg = page.locator('[class*="RestorePasswordAcceptancePopup_content"]');
         this.loginBtn = page.locator('div[class*="Navbar_btn_enter"]');
-        this.registrationNoAccountBtn = page.locator('[data-testid="switcher"]');
+        this.registrationlink = page.locator('[data-testid="switcher"]');
         this.registrationBtn = page.locator('[class*="LoginForm_submitBtn"]');
         this.errorRegistrationPasswordMsg = page.locator('//form/div[2]/p');
         this.errorRegistrationEmailMsg = page.locator('//form/div[1]/p');

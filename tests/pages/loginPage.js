@@ -48,7 +48,7 @@ export class LoginPage {
     }
 
     async navigateLoginPopUp() {
-        await this.page.goto('');
+        await this.page.goto();
         await this.page.waitForLoadState();
         await this.loginBtn.click();
         await expect(this.authorizationPopUp).toBeVisible();

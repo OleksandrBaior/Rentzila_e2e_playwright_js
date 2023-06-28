@@ -26,7 +26,7 @@ test('C212 - Checking "Послуги" section on the main page ', async ({ page
             
             await mainPage.services.nth(service).click();
             await expect(mapPage.secectedFilter).toHaveText(RegExp(`${services[service]}`));
-            await page.waitForLoadState('networkidle');
+            await page.waitForLoadState('domcontentloaded');
            
             await mapPage.firstUnit.click(); 
             await unitPage.checkRelevantServicePresent(services, service)

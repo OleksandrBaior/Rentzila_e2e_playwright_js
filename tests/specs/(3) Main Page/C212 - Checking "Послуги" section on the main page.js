@@ -32,7 +32,6 @@ test('C212 - Checking "Послуги" section on the main page ', async ({ page
             await unitPage.checkRelevantServicePresent(services, service)
            
             await headerPage.logo.click();
-            await mainPage.servicesSection.scrollIntoViewIfNeeded();
             await expect(mainPage.servicesSection).toBeVisible();
         }
     }
@@ -50,14 +49,5 @@ test('C212 - Checking "Послуги" section on the main page ', async ({ page
         if (serviceTab == 'Інші') {
             await checkServices(3, servicesOther)
         }
-    }
-
-
- 
-
-
-
-
-    
-  
+    }  
 });

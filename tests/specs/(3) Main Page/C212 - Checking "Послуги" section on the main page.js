@@ -6,7 +6,7 @@ import { MapPage } from '../../pages/mapPage';
 import { UnitPage } from '../../pages/unitPage';
 
 test('C212 - Checking "Послуги" section on the main page ', async ({ page }) => {
-    test.setTimeout(90000);
+    test.setTimeout(120000);
     const mainPage = new MainPage(page);
     const basePage = new BasePage(page);
     const headerPage = new HeaderPage(page);

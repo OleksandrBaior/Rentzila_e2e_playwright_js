@@ -10,7 +10,7 @@ export class BasePage  {
     }
     
     async navigateBaseURL() {
-        await this.page.goto();
+        await this.page.goto('');
         await this.page.waitForLoadState();
     };
 };

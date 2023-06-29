@@ -11,7 +11,8 @@ test('C212 - Checking "Послуги" section on the main page ', async ({ page
     const basePage = new BasePage(page);
     const headerPage = new HeaderPage(page);
     const mapPage = new MapPage(page);
-    const unitPage = new UnitPage(page)
+    const unitPage = new UnitPage(page);
+
     await basePage.navigateBaseURL();
 
     async function checkServices(previousTab, serviceTab, services) {
@@ -30,7 +31,7 @@ test('C212 - Checking "Послуги" section on the main page ', async ({ page
 
             await mapPage.firstUnit.click();
             await unitPage.checkRelevantServicePresent(services, service);
-            
+
             await headerPage.logo.click();
             await expect(mainPage.servicesSection).toBeVisible();
         }

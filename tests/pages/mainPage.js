@@ -25,7 +25,7 @@ export class MainPage {
 
     async checkServiceTabColor(previousTab, serviceTab) {
         if (previousTab != null) {
-            await expect(serviceTab).toHaveCSS('background', RegExp(/rgb\(40, 49, 73\)/));
+            await expect(previousTab).not.toHaveCSS('background', RegExp(/rgb\(40, 49, 73\)/));
             await expect(serviceTab).toHaveCSS('background', RegExp(/rgb\(40, 49, 73\)/));
         } else {
             await expect(serviceTab).toHaveCSS('background', RegExp(/rgb\(40, 49, 73\)/));

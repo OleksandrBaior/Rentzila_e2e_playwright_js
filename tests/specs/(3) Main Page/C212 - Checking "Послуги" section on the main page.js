@@ -1,5 +1,5 @@
 import { expect, test } from '@playwright/test';
-import { MainPage, serviceTabs, servicesPopular, servicesAgricultural, serviceStructural, servicesOther} from '../../pages/mainPage'
+import { MainPage, serviceTabs, servicesPopular, servicesAgricultural, serviceStructural, servicesOther } from '../../pages/mainPage'
 import { BasePage } from '../../pages/basePage';
 import { HeaderPage } from '../../pages/headerPage';
 import { MapPage } from '../../pages/mapPage';
@@ -23,14 +23,14 @@ test('C212 - Checking "Послуги" section on the main page ', async ({ page
             await expect(mainPage.servicesCategories.nth(serviceTab)).toHaveText(serviceTabs[serviceTab]);
             await mainPage.checkServiceTabColor(serviceTab)
             await expect(mainPage.services.nth(service)).toHaveText(services[service]);
-            
+
             await mainPage.services.nth(service).click();
             await expect(mapPage.secectedFilter).toHaveText(RegExp(`${services[service]}`));
-            await page.waitForLoadState('domcontentloaded');
-           
-            await mapPage.firstUnit.click(); 
+            await page.waitForLoadState('domcontentloaded', { timeout: 500 });
+
+            await mapPage.firstUnit.click();
             await unitPage.checkRelevantServicePresent(services, service)
-           
+
             await headerPage.logo.click();
             await expect(mainPage.servicesSection).toBeVisible();
         }
@@ -39,15 +39,15 @@ test('C212 - Checking "Послуги" section on the main page ', async ({ page
     for (const serviceTab of serviceTabs) {
         if (serviceTab == 'Популярні') {
             await checkServices(0, servicesPopular)
-        }    
+        }
         if (serviceTab == 'Сільськогосподарські') {
             await checkServices(1, servicesAgricultural)
-        }   
+        }
         if (serviceTab == 'Будівельні') {
             await checkServices(2, serviceStructural)
-        }   
+        }
         if (serviceTab == 'Інші') {
             await checkServices(3, servicesOther)
         }
-    }  
+    }
 });

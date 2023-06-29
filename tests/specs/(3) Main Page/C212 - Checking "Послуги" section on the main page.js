@@ -1,5 +1,5 @@
 import { expect, test } from '@playwright/test';
-import { MainPage, serviceTabs, servicesPopular, servicesAgricultural, serviceStructural, servicesOther } from '../../pages/mainPage'
+import { MainPage, popularServices, agriculturalServices, structuralService, otherServices } from '../../pages/mainPage'
 import { BasePage } from '../../pages/basePage';
 import { HeaderPage } from '../../pages/headerPage';
 import { MapPage } from '../../pages/mapPage';
@@ -14,40 +14,31 @@ test('C212 - Checking "Послуги" section on the main page ', async ({ page
     const unitPage = new UnitPage(page)
     await basePage.navigateBaseURL();
 
-    async function checkServices(serviceTab, services) {
+    async function checkServices(previousTab, serviceTab, services) {
         for (const service in services) {
             await mainPage.servicesSection.scrollIntoViewIfNeeded();
             await expect(mainPage.servicesSection).toBeVisible();
 
-            await mainPage.servicesCategories.nth(serviceTab).click();
-            await expect(mainPage.servicesCategories.nth(serviceTab)).toHaveText(serviceTabs[serviceTab]);
-            await mainPage.checkServiceTabColor(serviceTab)
+            await serviceTab.click();
+            await expect(mainPage.services.nth(service)).toHaveText(services[service]);
+            await mainPage.checkServiceTabColor(previousTab, serviceTab);
             await expect(mainPage.services.nth(service)).toHaveText(services[service]);
 
             await mainPage.services.nth(service).click();
+            await page.waitForTimeout(200);
             await expect(mapPage.secectedFilter).toHaveText(RegExp(`${services[service]}`));
-            await page.waitForTimeout(500)
 
             await mapPage.firstUnit.click();
-            await unitPage.checkRelevantServicePresent(services, service)
-
+            await unitPage.checkRelevantServicePresent(services, service);
+            
             await headerPage.logo.click();
             await expect(mainPage.servicesSection).toBeVisible();
         }
     }
 
-    for (const serviceTab of serviceTabs) {
-        if (serviceTab == 'Популярні') {
-            await checkServices(0, servicesPopular)
-        }
-        if (serviceTab == 'Сільськогосподарські') {
-            await checkServices(1, servicesAgricultural)
-        }
-        if (serviceTab == 'Будівельні') {
-            await checkServices(2, serviceStructural)
-        }
-        if (serviceTab == 'Інші') {
-            await checkServices(3, servicesOther)
-        }
-    }
+    await checkServices(null, mainPage.popularServicesTab, popularServices);
+    await checkServices(mainPage.popularServicesTab, mainPage.agricultureServiceTab, agriculturalServices);
+    await checkServices(mainPage.agricultureServiceTab, mainPage.constructionServiceTab, structuralService);
+    await checkServices(mainPage.constructionServiceTab, mainPage.otherServiceTab, otherServices);
+
 });

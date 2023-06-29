@@ -15,7 +15,6 @@ export class MainPage {
         this.page = page;
         /* The "Послуги" section */
         this.servicesSection = page.locator("//h2[contains(text(), 'Послуги')]");
-        // this.servicesCategories = page.locator('[class*="RentzilaProposes_categories_list"] div');
         this.services = page.locator('//section[1]/div[2]/div');
         this.popularServicesTab = page.getByText('Популярні');
         this.agricultureServiceTab = page.getByText('Сільськогосподарські');

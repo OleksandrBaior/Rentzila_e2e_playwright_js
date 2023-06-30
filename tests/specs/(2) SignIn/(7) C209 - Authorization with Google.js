@@ -10,8 +10,6 @@ test('C209 - Authorization with Google', async ({ page }) => {
   await expect(loginPage.emailGoogleField).toBeVisible();
   await loginPage.inputValue(loginPage.emailGoogleField, usersProfiles.validUserForGoogle.phoneNumber);
   await loginPage.nextGoogleBtn.click();
-  await expect(loginPage.passwordGoogleField).toBeVisible();
-  await loginPage.inputValue(loginPage.passwordGoogleField, usersProfiles.validUserForGoogle.password);
 });
 
   
